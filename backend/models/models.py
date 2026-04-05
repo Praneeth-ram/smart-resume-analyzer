@@ -79,7 +79,7 @@ class Application(Base):
     status = Column(Enum(ApplicationStatus), default=ApplicationStatus.applied)
     ats_score = Column(Float, nullable=True)
     resume_filename = Column(String, nullable=True)
-    # resume_drive_link = Column(String, nullable=True)
+    resume_drive_link = Column(String, nullable=True)
     resume_file = Column(LargeBinary, nullable=True)
     resume_mimetype = Column(String, nullable=True)
     applied_at = Column(DateTime(timezone=True), server_default=func.now())

@@ -4,6 +4,7 @@ from database import get_db
 from models.models import Application, JobPost, StudentProfile, ApplicationStatus, User
 from schemas.schemas import ATSScoreResponse
 from services.ats_service import extract_resume_text, compute_ats_score, generate_feedback
+from services.drive_service import upload_resume_to_drive
 from utils.auth import get_current_user
 
 router = APIRouter()
@@ -59,6 +60,7 @@ async def upload_resume(
     file_bytes = await file.read()
 
     # ⭐ Remove old resume if re-upload
+    application.resume_drive_link = None
     application.resume_file = None
     application.resume_mimetype = None
 
@@ -89,12 +91,34 @@ async def upload_resume(
     if passed:
         application.status = ApplicationStatus.ats_passed
 
-        # ⭐ Store resume in DB ONLY if ATS passed
-        application.resume_file = file_bytes
-        application.resume_mimetype = file.content_type or "application/pdf"
+        # Upload to Drive
+        student_name = student_profile.name
+        job_title = job.title
+        drive_link, drive_error = upload_resume_to_drive(
+            file_bytes=file_bytes,
+            filename=file.filename,
+            student_name=student_name,
+            job_title=job_title,
+            mimetype=file.content_type or "application/pdf"
+        )
+        
+        if drive_error:
+            # Log the error but continue (graceful fallback)
+            print(f"⚠️ Drive upload error: {drive_error}")
+            application.resume_drive_link = None
+        else:
+            application.resume_drive_link = drive_link
+
+        # Do not store in DB
+        application.resume_file = None
+        application.resume_mimetype = None
 
     else:
         application.status = ApplicationStatus.ats_failed
+
+        application.resume_drive_link = None
+        application.resume_file = None
+        application.resume_mimetype = None
 
     db.commit()
     db.refresh(application)
