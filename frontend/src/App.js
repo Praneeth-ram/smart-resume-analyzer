@@ -23,6 +23,7 @@ import HRJobsPage           from './pages/hr/HRJobsPage';
 import CreateJobPage        from './pages/hr/CreateJobPage';
 import ApplicationsPage     from './pages/hr/ApplicationsPage';
 
+
 const ProtectedRoute = ({ children, role }) => {
   const { user, loading } = useAuth();
   if (loading) return (
@@ -34,6 +35,11 @@ const ProtectedRoute = ({ children, role }) => {
   if (role && user.role !== role) return <Navigate to="/" replace />;
   return children;
 };
+
+import RAGAnalysisPage from './pages/hr/RAGAnalysisPage';
+// Inside <Routes>:
+<Route path="/hr/rag/:applicationId"
+  element={<ProtectedRoute role="hr"><RAGAnalysisPage /></ProtectedRoute>} />
 
 function AppRoutes() {
   const { user } = useAuth();

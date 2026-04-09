@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
+from datetime import date
 from database import get_db
 from models.models import Application, StudentProfile, JobPost, User
 from schemas.schemas import ApplicationCreate, ApplicationOut
@@ -55,6 +56,10 @@ def apply_for_job(
     job = db.query(JobPost).filter(JobPost.id == data.job_post_id).first()
     if not job:
         raise HTTPException(status_code=404, detail="Job not found")
+    
+    today = date.today()
+    if job.deadline < today:
+        raise HTTPException(status_code=400, detail="Application deadline has passed for this job")
 
     application = Application(
         student_id=profile.id,

@@ -16,11 +16,19 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 security = HTTPBearer()
 
 def hash_password(password: str):
-    password = password[:72]   # truncate for bcrypt
+    """Hash password with truncation to 72 bytes for bcrypt compatibility."""
+    import hashlib
+    # Hash the password first if it's longer than 72 bytes
+    if len(password.encode()) > 72:
+        password = hashlib.sha256(password.encode()).hexdigest()
     return pwd_context.hash(password)
 
 def verify_password(plain_password, hashed_password):
-    plain_password = plain_password[:72]
+    """Verify password against hashed password."""
+    import hashlib
+    # Hash the password first if it's longer than 72 bytes (same as hash_password)
+    if len(plain_password.encode()) > 72:
+        plain_password = hashlib.sha256(plain_password.encode()).hexdigest()
     return pwd_context.verify(plain_password, hashed_password)
 
 def create_access_token(data: dict) -> str:

@@ -67,6 +67,11 @@ async def upload_resume(
     # ✅ Extract text
     resume_text = extract_resume_text(file_bytes, file.filename)
 
+    # ───────────────────────────────────────────────────────────────
+    # ⭐ NEW — store plain text for Phase 2 RAG analysis
+    application.resume_text = resume_text
+    # ───────────────────────────────────────────────────────────────
+
     # ✅ Compute ATS score
     score, matched_skills, missing_skills = compute_ats_score(
         resume_text=resume_text,
@@ -91,6 +96,17 @@ async def upload_resume(
     if passed:
         application.status = ApplicationStatus.ats_passed
 
+        # ───────────────────────────────────────────────────────────
+        # ⭐ NEW — clear any previous RAG result on re-upload,
+        #    so HR is not looking at stale Phase 2 data
+        application.rag_verdict = None
+        application.rag_score = None
+        application.rag_reasoning = None
+        application.rag_strengths = None
+        application.rag_gaps = None
+        application.rag_recommendation = None
+        # ───────────────────────────────────────────────────────────
+
         # Upload to Drive
         student_name = student_profile.name
         job_title = job.title
@@ -101,21 +117,18 @@ async def upload_resume(
             job_title=job_title,
             mimetype=file.content_type or "application/pdf"
         )
-        
+
         if drive_error:
-            # Log the error but continue (graceful fallback)
             print(f"⚠️ Drive upload error: {drive_error}")
             application.resume_drive_link = None
         else:
             application.resume_drive_link = drive_link
 
-        # Do not store in DB
         application.resume_file = None
         application.resume_mimetype = None
 
     else:
         application.status = ApplicationStatus.ats_failed
-
         application.resume_drive_link = None
         application.resume_file = None
         application.resume_mimetype = None

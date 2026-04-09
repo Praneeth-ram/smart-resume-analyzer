@@ -16,11 +16,15 @@ export default function RegisterPage() {
     setError(''); setLoading(true);
     try {
       const res = await register(form);
+      console.log('Registration successful:', res.data);
       loginUser(res.data);
       toast.success('Account created!');
       navigate(res.data.role === 'hr' ? '/hr/dashboard' : '/jobs');
     } catch (err) {
-      setError(err.response?.data?.detail || 'Registration failed. Please try again.');
+      console.error('Registration error:', err);
+      console.error('Error response:', err.response?.data);
+      const errorDetail = err.response?.data?.detail || err.message || 'Registration failed. Please try again.';
+      setError(errorDetail);
     } finally {
       setLoading(false);
     }

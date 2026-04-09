@@ -21,8 +21,26 @@ export default function CreateJobPage() {
     e.preventDefault();
     setError(''); setLoading(true);
     try {
+      // Validate deadline
+      if (!form.deadline) {
+        setError('Application deadline is required');
+        setActiveSection('details');
+        setLoading(false);
+        return;
+      }
+      
+      const deadlineDate = new Date(form.deadline);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      if (deadlineDate < today) {
+        setError('Deadline must be in the future');
+        setActiveSection('details');
+        setLoading(false);
+        return;
+      }
+      
       const payload = { ...form, ats_threshold: parseFloat(form.ats_threshold) };
-      if (!payload.deadline) delete payload.deadline;
       await createJob(payload);
       toast.success('Job posted successfully!');
       navigate('/hr/jobs');
@@ -131,9 +149,11 @@ export default function CreateJobPage() {
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label">Application Deadline</label>
-                    <input className="form-input" type="date"
+                    <label className="form-label">Application Deadline *</label>
+                    <input className="form-input" type="date" required
+                      min={new Date().toISOString().split('T')[0]}
                       value={form.deadline} onChange={e => set('deadline', e.target.value)} />
+                    <span className="form-hint">Students can only apply until this date. Must be in the future.</span>
                   </div>
 
                   {/* ATS Threshold */}

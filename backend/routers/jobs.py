@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
+from datetime import date
 from database import get_db
 from models.models import JobPost, HRProfile, User
 from schemas.schemas import JobPostCreate, JobPostOut
@@ -10,13 +11,21 @@ router = APIRouter()
 
 @router.get("/", response_model=List[JobPostOut])
 def get_all_jobs(db: Session = Depends(get_db)):
-    return db.query(JobPost).filter(JobPost.is_active == True).order_by(JobPost.created_at.desc()).all()
+    today = date.today()
+    return db.query(JobPost).filter(
+        JobPost.is_active == True,
+        JobPost.deadline >= today
+    ).order_by(JobPost.created_at.desc()).all()
 
 @router.get("/{job_id}", response_model=JobPostOut)
 def get_job(job_id: int, db: Session = Depends(get_db)):
-    job = db.query(JobPost).filter(JobPost.id == job_id).first()
+    today = date.today()
+    job = db.query(JobPost).filter(
+        JobPost.id == job_id,
+        JobPost.deadline >= today
+    ).first()
     if not job:
-        raise HTTPException(status_code=404, detail="Job not found")
+        raise HTTPException(status_code=404, detail="Job not found or deadline has passed")
     return job
 
 @router.post("/", response_model=JobPostOut)

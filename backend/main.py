@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from routers import rag
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -32,6 +33,7 @@ app.include_router(jobs.router, prefix="/api/jobs", tags=["Jobs"])
 app.include_router(applications.router, prefix="/api/applications", tags=["Applications"])
 app.include_router(resumes.router, prefix="/api/resumes", tags=["Resumes"])
 app.include_router(hr.router, prefix="/api/hr", tags=["HR"])
+app.include_router(rag.router, prefix="/api/rag", tags=["RAG"])
 
 @app.get("/")
 def root():

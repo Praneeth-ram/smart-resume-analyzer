@@ -254,10 +254,16 @@ export default function ApplicationsPage() {
                       {canAct && (
                         <>
                           {app.status === 'ats_passed' && (
-                            <button className="btn btn-sm" style={{ background: 'var(--bg-offwhite)', border: '1px solid var(--border-gray)', color: 'var(--text-body)' }}
-                              onClick={e => handleShortlist(app.application_id, e)}>
-                              ⭐ Shortlist
-                            </button>
+                            <>
+                              <button className="btn btn-sm" style={{ background: 'var(--bg-offwhite)', border: '1px solid var(--border-gray)', color: 'var(--text-body)' }}
+                                onClick={e => handleShortlist(app.application_id, e)}>
+                                ⭐ Shortlist
+                              </button>
+                              <button className="btn btn-secondary btn-sm"
+                                onClick={e => { e.stopPropagation(); navigate(`/hr/rag/${app.application_id}`); }}>
+                                🧠 RAG Analysis
+                              </button>
+                            </>
                           )}
                           <button className="btn btn-success btn-sm"
                             onClick={e => { e.stopPropagation(); setSelectApp(app); }}>

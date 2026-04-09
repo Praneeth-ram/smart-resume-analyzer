@@ -99,9 +99,19 @@ export default function JobListPage() {
                   </div>
                   <div style={{ display: 'flex', gap: 8, flexShrink: 0, flexWrap: 'wrap' }}>
                     <span className="badge badge-purple">{job.job_type || 'Full-time'}</span>
-                    {job.deadline && new Date(job.deadline) < new Date(Date.now() + 7*24*60*60*1000) && (
-                      <span className="badge badge-warning">Closing Soon</span>
-                    )}
+                    {job.deadline && (() => {
+                      const deadline = new Date(job.deadline);
+                      const today = new Date();
+                      today.setHours(0, 0, 0, 0);
+                      const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+                      
+                      if (daysLeft <= 3 && daysLeft > 0) {
+                        return <span className="badge" style={{ background: '#ffd700', color: '#333' }}>Closing Soon</span>;
+                      } else if (daysLeft <= 0) {
+                        return <span className="badge" style={{ background: '#ff6b6b', color: '#fff' }}>Closed</span>;
+                      }
+                      return null;
+                    })()}
                   </div>
                 </div>
 

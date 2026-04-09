@@ -112,6 +112,20 @@ export default function ApplyPage() {
                   </div>
                 )}
               </div>
+              {job.deadline && (() => {
+                const deadline = new Date(job.deadline);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+                
+                if (daysLeft < 0) {
+                  return <div style={{ marginTop: 16, padding: '12px 16px', background: '#fee8e8', color: '#c41e3a', borderRadius: 6, fontSize: 13, fontWeight: 600 }}>⏱️ Application deadline has passed</div>;
+                } else if (daysLeft <= 3) {
+                  return <div style={{ marginTop: 16, padding: '12px 16px', background: '#fff4e6', color: '#c85d1e', borderRadius: 6, fontSize: 13, fontWeight: 600 }}>⚠️ Only {daysLeft} days left to apply!</div>;
+                }
+                return null;
+              })()}
+              </div>
             </div>
 
             <div style={{ background: 'var(--bg-offwhite)', padding: '20px 24px', marginTop: 20, border: '1px solid var(--border-gray)' }}>
@@ -126,6 +140,5 @@ export default function ApplyPage() {
           </div>
         </div>
       </div>
-    </div>
   );
 }

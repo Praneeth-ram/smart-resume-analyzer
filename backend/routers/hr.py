@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from datetime import date
 from database import get_db
 from models.models import Application, JobPost, HRProfile, StudentProfile, User, ApplicationStatus
 from schemas.schemas import SelectionEmailRequest
@@ -50,7 +51,9 @@ def hr_dashboard(
     if not hr:
         raise HTTPException(status_code=404, detail="HR profile not found")
 
+    today = date.today()
     jobs = db.query(JobPost).filter(JobPost.hr_id == hr.id).all()
+    active_jobs = [j for j in jobs if j.is_active and j.deadline >= today]
 
     total_applications = 0
     ats_passed = 0
@@ -79,7 +82,7 @@ def hr_dashboard(
         "hr_name": hr.name,
         "company_name": hr.company_name,
         "total_jobs": len(jobs),
-        "active_jobs": len([j for j in jobs if j.is_active]),
+        "active_jobs": len(active_jobs),
         "total_applications": total_applications,
         "ats_passed": ats_passed,
         "selected": selected,

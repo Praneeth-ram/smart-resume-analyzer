@@ -77,7 +77,7 @@ class JobPostCreate(BaseModel):
     experience_required: Optional[str] = None
     salary_range: Optional[str] = None
     ats_threshold: float = 80.0
-    deadline: Optional[date] = None
+    deadline: date
 
 class JobPostOut(BaseModel):
     id: int
