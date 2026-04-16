@@ -95,6 +95,7 @@ class JobPostOut(BaseModel):
     is_active: bool
     created_at: datetime
     deadline: Optional[date]
+    status: str
     class Config:
         from_attributes = True
 

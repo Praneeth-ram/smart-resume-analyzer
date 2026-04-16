@@ -37,6 +37,7 @@ export const uploadResume = (applicationId, file) => {
 
 // HR
 export const getHRDashboard = () => API.get('/hr/dashboard');
+export const getHRAnalytics = () => API.get('/hr/analytics');
 export const getJobApplications = (jobId) => API.get(`/hr/applications/${jobId}`);
 export const selectCandidate = (data) => API.post('/hr/select-candidate', data);
 export const shortlistCandidate = (id) => API.post(`/hr/shortlist/${id}`);

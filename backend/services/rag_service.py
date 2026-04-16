@@ -262,6 +262,7 @@ def _llm_verdict(
     """
     # ── Configure Gemini client ───────────────────────────────────
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+    print("API KEY:", os.getenv("GEMINI_API_KEY"))  # DEBUG LINE
     model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
 
     generation_config = genai.GenerationConfig(

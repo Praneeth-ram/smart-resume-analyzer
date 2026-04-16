@@ -24,6 +24,9 @@ import CreateJobPage        from './pages/hr/CreateJobPage';
 import ApplicationsPage     from './pages/hr/ApplicationsPage';
 
 
+import RAGAnalysisPage      from './pages/hr/RAGAnalysisPage';
+import HRAnalyticsPage      from './pages/hr/HRAnalyticsPage';
+
 const ProtectedRoute = ({ children, role }) => {
   const { user, loading } = useAuth();
   if (loading) return (
@@ -35,11 +38,6 @@ const ProtectedRoute = ({ children, role }) => {
   if (role && user.role !== role) return <Navigate to="/" replace />;
   return children;
 };
-
-import RAGAnalysisPage from './pages/hr/RAGAnalysisPage';
-// Inside <Routes>:
-<Route path="/hr/rag/:applicationId"
-  element={<ProtectedRoute role="hr"><RAGAnalysisPage /></ProtectedRoute>} />
 
 function AppRoutes() {
   const { user } = useAuth();
@@ -61,9 +59,11 @@ function AppRoutes() {
 
         {/* HR */}
         <Route path="/hr/dashboard"                    element={<ProtectedRoute role="hr"><HRDashboard /></ProtectedRoute>} />
+        <Route path="/hr/analytics"                    element={<ProtectedRoute role="hr"><HRAnalyticsPage /></ProtectedRoute>} />
         <Route path="/hr/jobs"                         element={<ProtectedRoute role="hr"><HRJobsPage /></ProtectedRoute>} />
         <Route path="/hr/jobs/new"                     element={<ProtectedRoute role="hr"><CreateJobPage /></ProtectedRoute>} />
         <Route path="/hr/jobs/:jobId/applications"     element={<ProtectedRoute role="hr"><ApplicationsPage /></ProtectedRoute>} />
+        <Route path="/hr/rag/:applicationId"           element={<ProtectedRoute role="hr"><RAGAnalysisPage /></ProtectedRoute>} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
@@ -72,7 +72,7 @@ function AppRoutes() {
         position="bottom-right"
         theme="light"
         autoClose={3500}
-        toastStyle={{ borderRadius: 0, fontFamily: 'Outfit', fontSize: 14, borderLeft: '4px solid var(--purple)' }}
+        toastStyle={{ borderRadius: 0, fontFamily: 'Söhne', fontSize: 14, borderLeft: '4px solid var(--purple)' }}
       />
     </>
   );

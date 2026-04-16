@@ -87,6 +87,8 @@
 #     student = relationship("StudentProfile", back_populates="applications")
 #     job_post = relationship("JobPost", back_populates="applications")
 
+from datetime import date
+
 from sqlalchemy import Column, Integer, String, Text, Date, DateTime, Float, Boolean, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -159,6 +161,18 @@ class JobPost(Base):
     deadline = Column(Date)
     hr = relationship("HRProfile", back_populates="job_posts")
     applications = relationship("Application", back_populates="job_post")
+
+    # ✅ ADD THIS PROPERTY
+    @property
+    def status(self):
+        today = date.today()
+
+        if not self.is_active:
+            return "deactivated"
+        elif self.deadline and self.deadline < today:
+            return "expired"
+        else:
+            return "active"
 
 class Application(Base):
     __tablename__ = "applications"

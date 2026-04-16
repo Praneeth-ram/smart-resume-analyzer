@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getJobs } from '../../api';
 
+const fontFamily = "'Söhne', 'Inter', sans-serif";
 const JOB_TYPES = ['All', 'Full-time', 'Part-time', 'Remote', 'Internship', 'Contract'];
 
 export default function JobListPage() {
@@ -26,121 +27,183 @@ export default function JobListPage() {
   });
 
   return (
-    <div>
-      {/* Page Header */}
-      <div className="page-header">
-        <div className="page-header-inner">
-          <div className="breadcrumb">
-            <span>Home</span>
-            <span className="breadcrumb-sep">›</span>
-            <span style={{ color: 'rgba(255,255,255,0.8)' }}>Careers</span>
+    <div style={{ background: '#f8fafc', minHeight: '100vh', fontFamily, paddingBottom: 80, overflowX: 'hidden' }}>
+      
+      {/* Premium Header Container */}
+      <div style={{ 
+        position: 'relative',
+        background: 'linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)',
+        borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
+        padding: '80px 40px 100px',
+        overflow: 'hidden'
+      }}>
+        {/* Ambient background glows */}
+        <div style={{
+          position: 'absolute', top: '-10%', right: '10%',
+          width: '500px', height: '500px',
+          background: 'radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%)',
+          borderRadius: '50%', zIndex: 0
+        }} />
+        <div style={{
+          position: 'absolute', bottom: '-20%', left: '5%',
+          width: '400px', height: '400px',
+          background: 'radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, transparent 70%)',
+          borderRadius: '50%', zIndex: 0
+        }} />
+
+        <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1, textAlign: 'center' }}>
+          <div className="animate-in">
+            <h1 style={{ fontSize: window.innerWidth < 768 ? 40 : 56, fontWeight: 900, color: '#0f172a', letterSpacing: '-1.5px', marginBottom: 20 }}>
+              Find Your <span style={{ 
+                background: 'linear-gradient(135deg, #7c3aed 0%, #0ea5e9 100%)',
+                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
+              }}>Next Role.</span>
+            </h1>
+            <p style={{ fontSize: 18, color: '#64748b', margin: '0 auto 48px', maxWidth: 640 }}>
+              Discover {jobs.length || 'exciting'} open positions and match your resume against intelligent ATS parsing to see your exact fitness score.
+            </p>
+
+            {/* Smart Search Bar */}
+            <div style={{
+              maxWidth: 720, margin: '0 auto', background: '#ffffff',
+              borderRadius: '20px', padding: '12px', display: 'flex', gap: 12,
+              boxShadow: '0 20px 40px rgba(0,0,0,0.05)', border: '1px solid rgba(0,0,0,0.03)',
+              alignItems: 'center'
+            }}>
+              <span style={{ paddingLeft: 16, fontSize: 20 }}>🔍</span>
+              <input
+                style={{
+                  flex: 1, border: 'none', outline: 'none', background: 'transparent',
+                  padding: '12px 8px', fontSize: 16, fontFamily, color: '#0f172a'
+                }}
+                placeholder="Search titles, companies, skills or locations..."
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+              />
+              <button style={{
+                 background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)', border: 'none',
+                 color: '#fff', padding: '14px 32px', borderRadius: '14px', fontSize: 15, fontWeight: 800,
+                 cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 8px 20px rgba(124, 58, 237, 0.2)'
+              }} onMouseEnter={e => e.target.style.transform = 'translateY(-2px)'} onMouseLeave={e => e.target.style.transform = 'translateY(0)'}>
+                Search
+              </button>
+            </div>
           </div>
-          <h1>Find Your <span className="page-header-accent">Next Role</span></h1>
-          <p>{jobs.length} active positions across all career areas</p>
         </div>
       </div>
 
-      {/* Search & Filter Bar */}
-      <div style={{ background: 'var(--bg-offwhite)', borderBottom: '1px solid var(--border-gray)', padding: '24px 40px' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <div className="search-bar-wrap" style={{ maxWidth: 680, marginBottom: 16 }}>
-            <div className="search-bar-icon">🔍</div>
-            <input
-              className="search-bar-input"
-              placeholder="Search by title, company, skill or location…"
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
-            <button className="search-bar-btn">Search</button>
-          </div>
-          <div className="filter-chips">
-            {JOB_TYPES.map(t => (
-              <button key={t} className={`filter-chip ${activeType === t ? 'active' : ''}`}
-                onClick={() => setActiveType(t)}>
+      {/* Main Content */}
+      <div style={{ maxWidth: 1280, margin: '-25px auto 0', padding: '0 40px', position: 'relative', zIndex: 10 }}>
+        
+        {/* Filter Chips Layer */}
+        <div className="animate-in" style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap', marginBottom: 48, animationDelay: '0.1s' }}>
+          {JOB_TYPES.map(t => {
+            const active = activeType === t;
+            return (
+              <button key={t} onClick={() => setActiveType(t)} style={{
+                padding: '10px 24px', borderRadius: '30px', fontSize: 14, fontWeight: 700,
+                border: active ? 'none' : '1px solid #e2e8f0', cursor: 'pointer',
+                background: active ? '#0f172a' : '#ffffff',
+                color: active ? '#ffffff' : '#64748b', transition: 'all 0.2s',
+                boxShadow: active ? '0 10px 20px rgba(15, 23, 42, 0.2)' : '0 4px 10px rgba(0,0,0,0.03)'
+              }} onMouseEnter={e => { if(!active) e.target.style.borderColor = '#94a3b8'; }} 
+                 onMouseLeave={e => { if(!active) e.target.style.borderColor = '#e2e8f0'; }}>
                 {t}
               </button>
-            ))}
-          </div>
+            )
+          })}
         </div>
-      </div>
 
-      {/* Job Listings */}
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '40px 40px 80px' }}>
+        {/* Results Metadata */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-          <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>
-            Showing <strong style={{ color: 'var(--text-body)' }}>{filtered.length}</strong> result{filtered.length !== 1 ? 's' : ''}
-            {search && <> for "<strong style={{ color: 'var(--text-body)' }}>{search}</strong>"</>}
-          </p>
+          <div style={{ fontSize: 15, fontWeight: 600, color: '#64748b' }}>
+            Showing <strong>{filtered.length}</strong> {filtered.length === 1 ? 'position' : 'positions'} {search && <span>for <strong style={{color: '#0f172a'}}>"{search}"</strong></span>}
+          </div>
         </div>
 
         {loading ? (
-          <div style={{ textAlign: 'center', paddingTop: 80 }}><div className="spinner" /></div>
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '100px 0' }}>
+            <div className="spinner" style={{ width: 50, height: 50, borderTopColor: '#7c3aed' }}></div>
+          </div>
         ) : filtered.length === 0 ? (
-          <div className="empty-state">
-            <div className="empty-state-icon">🔍</div>
-            <h3>No jobs found</h3>
-            <p>Try adjusting your search or filter criteria</p>
-            <button className="btn btn-outline" style={{ marginTop: 20 }} onClick={() => { setSearch(''); setActiveType('All'); }}>Clear Filters</button>
+          <div className="animate-in" style={{ textAlign: 'center', padding: '100px 20px', background: '#fff', borderRadius: '24px', border: '1px solid #f1f5f9', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
+            <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
+            <h3 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', marginBottom: 12 }}>No matches found</h3>
+            <p style={{ color: '#64748b', fontSize: 16 }}>We couldn't find any positions matching your specific criteria.</p>
+            <button onClick={() => { setSearch(''); setActiveType('All'); }} style={{
+              marginTop: 24, padding: '12px 24px', borderRadius: '12px', background: '#f8fafc', 
+              color: '#475569', fontWeight: 700, border: '1px solid #e2e8f0', cursor: 'pointer'
+            }}>
+              Clear Filters
+            </button>
           </div>
         ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: 'var(--border-gray)', border: '1px solid var(--border-gray)' }}>
-            {filtered.map(job => (
-              <div key={job.id} className="job-card" onClick={() => navigate(`/jobs/${job.id}`)}>
-                <div className="job-card-header">
-                  <div style={{ flex: 1 }}>
-                    <div className="job-card-title">{job.title}</div>
-                    <div className="job-card-meta" style={{ marginTop: 6 }}>
-                      <span>🏢 {job.company}</span>
-                      {job.location && <span>📍 {job.location}</span>}
-                      {job.job_type && <span>⏱ {job.job_type}</span>}
-                      {job.salary_range && <span>💰 {job.salary_range}</span>}
-                      {job.experience_required && <span>🎓 {job.experience_required}</span>}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: 32 }}>
+            {filtered.map((job, idx) => {
+              const deadline = new Date(job.deadline);
+              const today = new Date();
+              today.setHours(0,0,0,0);
+              const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+              const isUrgent = daysLeft > 0 && daysLeft <= 3;
+              const isClosed = daysLeft <= 0;
+
+              return (
+                <div key={job.id} className="animate-in" onClick={() => navigate(`/jobs/${job.id}`)} style={{
+                  background: '#ffffff', borderRadius: '24px', padding: '36px', cursor: 'pointer',
+                  border: '1px solid rgba(0,0,0,0.03)', boxShadow: '0 10px 30px rgba(0,0,0,0.02)',
+                  animationDelay: `${0.1 + (idx * 0.05)}s`, transition: 'all 0.3s ease',
+                  display: 'flex', flexDirection: 'column'
+                }} onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.06)'; }}
+                   onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.02)'; }}>
+                  
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
+                     <div style={{
+                       background: 'rgba(124, 58, 237, 0.06)', color: '#7c3aed', padding: '8px 16px',
+                       borderRadius: '20px', fontSize: 12, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 0.6
+                     }}>
+                       {job.job_type || 'Full-time'}
+                     </div>
+                     {isUrgent && <div style={{ background: '#fef08a', color: '#854d0e', padding: '6px 14px', borderRadius: '20px', fontSize: 11, fontWeight: 800, textTransform: 'uppercase' }}>Closing Soon</div>}
+                     {isClosed && <div style={{ background: '#fee2e2', color: '#b91c1c', padding: '6px 14px', borderRadius: '20px', fontSize: 11, fontWeight: 800, textTransform: 'uppercase' }}>Closed</div>}
+                  </div>
+
+                  <h3 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', marginBottom: 12, lineHeight: 1.3 }}>{job.title}</h3>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: '#475569', marginBottom: 20 }}>{job.company}</div>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginBottom: 24, fontSize: 13, color: '#64748b', fontWeight: 500 }}>
+                    {job.location && <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span>📍</span> {job.location}</div>}
+                    {job.salary_range && <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ color: '#10b981' }}>💰</span> {job.salary_range}</div>}
+                    {job.experience_required && <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span>🎓</span> {job.experience_required}</div>}
+                  </div>
+
+                  {job.skills_required && (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 'auto', marginBottom: 32 }}>
+                      {job.skills_required.split(',').slice(0, 4).map(s => (
+                        <span key={s} style={{ background: '#f1f5f9', color: '#475569', padding: '6px 14px', borderRadius: '10px', fontSize: 13, fontWeight: 600 }}>
+                          {s.trim()}
+                        </span>
+                      ))}
+                      {job.skills_required.split(',').length > 4 && (
+                        <span style={{ fontSize: 13, color: '#94a3b8', fontWeight: 600, padding: '6px 4px' }}>
+                          +{job.skills_required.split(',').length - 4} more
+                        </span>
+                      )}
                     </div>
-                  </div>
-                  <div style={{ display: 'flex', gap: 8, flexShrink: 0, flexWrap: 'wrap' }}>
-                    <span className="badge badge-purple">{job.job_type || 'Full-time'}</span>
-                    {job.deadline && (() => {
-                      const deadline = new Date(job.deadline);
-                      const today = new Date();
-                      today.setHours(0, 0, 0, 0);
-                      const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
-                      
-                      if (daysLeft <= 3 && daysLeft > 0) {
-                        return <span className="badge" style={{ background: '#ffd700', color: '#333' }}>Closing Soon</span>;
-                      } else if (daysLeft <= 0) {
-                        return <span className="badge" style={{ background: '#ff6b6b', color: '#fff' }}>Closed</span>;
-                      }
-                      return null;
-                    })()}
+                  )}
+
+                  <div style={{ height: 1, background: '#f1f5f9', margin: '0 0 24px 0' }} />
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: 13, color: '#94a3b8', fontWeight: 500 }}>
+                       Posted {new Date(job.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </span>
+                    <span style={{ color: '#7c3aed', fontSize: 15, fontWeight: 800, display: 'flex', alignItems: 'center', gap: 4 }}>
+                      Apply Now <span style={{ fontSize: 18 }}>›</span>
+                    </span>
                   </div>
                 </div>
-
-                {/* Skills */}
-                {job.skills_required && (
-                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                    {job.skills_required.split(',').slice(0, 7).map(s => (
-                      <span key={s} className="skill-tag" style={{ fontSize: 12, padding: '3px 10px' }}>{s.trim()}</span>
-                    ))}
-                    {job.skills_required.split(',').length > 7 && (
-                      <span style={{ fontSize: 12, color: 'var(--text-muted)', alignSelf: 'center' }}>
-                        +{job.skills_required.split(',').length - 7} more
-                      </span>
-                    )}
-                  </div>
-                )}
-
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>
-                    Posted {new Date(job.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
-                    {job.deadline && ` · Deadline: ${new Date(job.deadline).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}`}
-                  </span>
-                  <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--purple)', display: 'flex', alignItems: 'center', gap: 5 }}>
-                    View & Apply
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                  </span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>

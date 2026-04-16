@@ -188,3 +188,68 @@ def view_resume(
             f"inline; filename={application.resume_filename}"
         }
     )
+
+@router.get("/analytics")
+def hr_analytics(
+    current_user: User = Depends(require_role("hr")),
+    db: Session = Depends(get_db)
+):
+    hr = db.query(HRProfile).filter(HRProfile.user_id == current_user.id).first()
+    if not hr:
+        raise HTTPException(status_code=404, detail="HR profile not found")
+
+    jobs = db.query(JobPost).filter(JobPost.hr_id == hr.id).all()
+    
+    total_applied = 0
+    total_ats_passed = 0
+    total_shortlisted = 0
+    total_selected = 0
+    
+    job_stats = []
+
+    for job in jobs:
+        apps = db.query(Application).filter(Application.job_post_id == job.id).all()
+        
+        job_applied = len(apps)
+        job_ats_passed = len([a for a in apps if a.status in [ApplicationStatus.ats_passed, ApplicationStatus.shortlisted, ApplicationStatus.selected]])
+        job_shortlisted = len([a for a in apps if a.status in [ApplicationStatus.shortlisted, ApplicationStatus.selected]])
+        job_selected = len([a for a in apps if a.status == ApplicationStatus.selected])
+        
+        total_applied += job_applied
+        total_ats_passed += job_ats_passed
+        total_shortlisted += job_shortlisted
+        total_selected += job_selected
+        
+        job_stats.append({
+            "title": job.title,
+            "applied": job_applied,
+            "ats_passed": job_ats_passed,
+            "shortlisted": job_shortlisted,
+            "selected": job_selected
+        })
+
+    insights = []
+    if total_applied > 0:
+        pass_rate = (total_ats_passed / total_applied) * 100
+        if pass_rate < 30:
+            insights.append("ATS pass rate is below 30%. Consider relaxing keyword constraints or reviewing Job Descriptions.")
+        elif pass_rate > 70:
+            insights.append(f"High ATS pass rate of {pass_rate:.1f}%. The screening criteria might be too broad.")
+        else:
+            insights.append(f"Healthy ATS pass rate of {pass_rate:.1f}%. Candidate quality aligns with requirements.")
+            
+        select_rate = (total_selected / total_applied) * 100
+        if select_rate > 15:
+             insights.append("High selection rate observed. Your job listings are attracting highly relevant candidates!")
+             
+        if total_shortlisted > 0 and total_selected == 0:
+             insights.append("You have shortlisted candidates awaiting final selection review.")
+
+    return {
+        "applied": total_applied,
+        "ats_passed": total_ats_passed,
+        "shortlisted": total_shortlisted,
+        "selected": total_selected,
+        "jobs": job_stats,
+        "insights": insights if insights else ["Not enough data to calculate pipeline tendencies."]
+    }
