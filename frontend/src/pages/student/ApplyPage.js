@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getJob, applyForJob } from '../../api';
 import { toast } from 'react-toastify';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 export default function ApplyPage() {
   const { jobId } = useParams();
@@ -73,7 +73,7 @@ export default function ApplyPage() {
               <span style={{ color: '#0f172a' }}>Apply</span>
             </div>
             
-            <h1 style={{ fontSize: window.innerWidth < 768 ? 32 : 44, fontWeight: 900, color: '#0f172a', letterSpacing: '-1px', marginBottom: 16 }}>
+            <h1 style={{ fontSize: window.innerWidth < 768 ? 24 : 32, fontWeight: 700, color: '#0f172a', letterSpacing: '-1px', marginBottom: 16 }}>
               Submit Your <span style={{ 
                 background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
@@ -102,10 +102,10 @@ export default function ApplyPage() {
               padding: '24px 32px', borderRadius: '24px', boxShadow: '0 15px 30px rgba(15, 23, 42, 0.2)',
               marginBottom: 32, animationDelay: '0.1s', display: 'flex', alignItems: 'center', gap: 20
             }}>
-               <div style={{ fontSize: 32 }}>📋</div>
+               <div style={{ fontSize: 24 }}>📋</div>
                <div>
-                 <h3 style={{ fontSize: 16, fontWeight: 800, color: '#fff', margin: '0 0 6px 0' }}>First, verify your personal details.</h3>
-                 <p style={{ margin: 0, color: '#cbd5e1', fontSize: 14, lineHeight: 1.5 }}>
+                 <h3 style={{ fontSize: 15, fontWeight: 700, color: '#fff', margin: '0 0 6px 0' }}>First, verify your personal details.</h3>
+                 <p style={{ margin: 0, color: '#cbd5e1', fontSize: 13, lineHeight: 1.5 }}>
                    After submitting this form, you will securely upload your resume for Intelligent ATS Evaluation.
                  </p>
                </div>
@@ -156,7 +156,7 @@ export default function ApplyPage() {
                 </div>
 
                 <button type="submit" disabled={loading} style={{ 
-                  width: '100%', borderRadius: '16px', padding: '16px', fontSize: 16, fontWeight: 800,
+                  width: '100%', borderRadius: '16px', padding: '16px', fontSize: 16, fontWeight: 700,
                   background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', border: 'none', color: '#fff',
                   cursor: loading ? 'not-allowed' : 'pointer', transition: 'all 0.3s',
                   boxShadow: '0 10px 25px rgba(16, 185, 129, 0.3)'
@@ -177,11 +177,11 @@ export default function ApplyPage() {
                 border: '1px solid rgba(0,0,0,0.04)', boxShadow: '0 20px 50px rgba(0,0,0,0.04)',
                 animationDelay: '0.2s'
               }}>
-                <div style={{ fontSize: 11, fontWeight: 800, color: '#94a3b8', letterSpacing: 0.8, textTransform: 'uppercase', marginBottom: 20 }}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: 0.8, textTransform: 'uppercase', marginBottom: 20 }}>
                   You are applying for
                 </div>
                 
-                <h3 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', marginBottom: 12, lineHeight: 1.3 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 12, lineHeight: 1.3 }}>
                   {job.title}
                 </h3>
                 
@@ -199,7 +199,7 @@ export default function ApplyPage() {
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 14 }}>
                     <span style={{ color: '#64748b', fontWeight: 600 }}>Required ATS</span>
-                    <span style={{ fontWeight: 900, color: '#7c3aed', fontSize: 16 }}>{job.ats_threshold}%</span>
+                    <span style={{ fontWeight: 700, color: '#7c3aed', fontSize: 16 }}>{job.ats_threshold}%</span>
                   </div>
                   {job.deadline && (
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 14 }}>

@@ -4,12 +4,19 @@ import { register } from '../api';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 export default function RegisterPage() {
-  const [form, setForm] = useState({ email: '', password: '', role: 'student' });
+  const [form, setForm] = useState({ 
+    email: '', 
+    password: '', 
+    role: 'student',
+    full_name: '',
+    company_name: '' 
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isCreatingAccount, setIsCreatingAccount] = useState(false);
   const { loginUser } = useAuth();
   const navigate = useNavigate();
 
@@ -18,13 +25,18 @@ export default function RegisterPage() {
     setError(''); setLoading(true);
     try {
       const res = await register(form);
-      loginUser(res.data);
-      toast.success('Account created!');
-      navigate(res.data.role === 'hr' ? '/hr/dashboard' : '/jobs');
+      // Start the transition
+      setIsCreatingAccount(true);
+      
+      // Delay navigation
+      setTimeout(() => {
+        loginUser(res.data);
+        toast.success('Account created!');
+        navigate(res.data.role === 'hr' ? '/hr/dashboard' : '/jobs');
+      }, 1500);
     } catch (err) {
       const errorDetail = err.response?.data?.detail || err.message || 'Registration failed. Please try again.';
       setError(errorDetail);
-    } finally {
       setLoading(false);
     }
   };
@@ -42,7 +54,62 @@ export default function RegisterPage() {
   };
 
   return (
-    <div style={{ display: 'flex', minHeight: 'calc(100vh - 68px)', fontFamily, overflowX: 'hidden' }}>
+    <div style={{ display: 'flex', minHeight: 'calc(100vh - 68px)', fontFamily, position: 'relative', overflowX: 'hidden' }}>
+      
+      {/* Transition Overlay */}
+      <style>{`
+        @keyframes pulse {
+          0% { opacity: 0.6; transform: scale(0.98); }
+          50% { opacity: 1; transform: scale(1); }
+          100% { opacity: 0.6; transform: scale(0.98); }
+        }
+        @keyframes loadRegister {
+          0% { width: 0%; opacity: 0; }
+          10% { opacity: 1; }
+          100% { width: 100%; opacity: 1; }
+        }
+      `}</style>
+      
+      <div style={{
+        position: 'fixed',
+        top: 0, left: 0, width: '100vw', height: '100vh',
+        background: '#010409',
+        zIndex: 9999,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        transition: 'all 0.8s ease-in-out',
+        opacity: isCreatingAccount ? 1 : 0,
+        pointerEvents: isCreatingAccount ? 'all' : 'none',
+        color: '#fff',
+        fontFamily
+      }}>
+        <div style={{ 
+          textAlign: 'center',
+          animation: 'pulse 2s infinite'
+        }}>
+          <div style={{ fontSize: 44, marginBottom: 24, filter: 'drop-shadow(0 0 15px rgba(16, 185, 129, 0.4))' }}>✨</div>
+          <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: '0.5px', marginBottom: 8 }}>
+            Creating Account...
+          </div>
+          <p style={{ color: '#94a3b8', fontSize: 16, marginBottom: 32 }}>
+            Welcome, {form.full_name}! Configuring your personalized AI workspace
+          </p>
+
+          <div style={{ 
+            width: '280px', height: '2px', background: 'rgba(255,255,255,0.08)', 
+            borderRadius: '1px', margin: '0 auto', overflow: 'hidden'
+          }}>
+            <div style={{ 
+              height: '100%', 
+              background: 'linear-gradient(90deg, #10b981, #34d399, #10b981)',
+              backgroundSize: '200% 100%',
+              animation: 'loadRegister 1.4s ease-in-out forwards'
+            }} />
+          </div>
+        </div>
+      </div>
       
       {/* Left Premium Panel */}
       <div style={{
@@ -57,7 +124,7 @@ export default function RegisterPage() {
         <div style={{ maxWidth: 380, position: 'relative', zIndex: 1 }} className="animate-in">
           <div style={{ width: 64, height: 6, background: 'linear-gradient(90deg, #10b981 0%, #059669 100%)', borderRadius: 3, marginBottom: 40 }} />
           
-          <h1 style={{ fontSize: 44, fontWeight: 900, color: '#fff', lineHeight: 1.1, marginBottom: 20, letterSpacing: '-1px' }}>
+          <h1 style={{ fontSize: 44, fontWeight: 700, color: '#fff', lineHeight: 1.1, marginBottom: 20, letterSpacing: '-1px' }}>
             Start your AI-powered journey.
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16, lineHeight: 1.7, marginBottom: 56 }}>
@@ -68,7 +135,7 @@ export default function RegisterPage() {
              <p style={{ color: '#94a3b8', fontSize: 14, marginBottom: 16, fontWeight: 600 }}>Already have an account?</p>
              <Link to="/login" style={{ 
                display: 'inline-block', padding: '12px 24px', borderRadius: '12px', background: 'rgba(255,255,255,0.05)',
-               color: '#fff', textDecoration: 'none', fontWeight: 800, border: '1px solid rgba(255,255,255,0.1)',
+               color: '#fff', textDecoration: 'none', fontWeight: 700, border: '1px solid rgba(255,255,255,0.1)',
                transition: 'all 0.2s', fontSize: 14
              }} onMouseEnter={e => e.target.style.background = 'rgba(255,255,255,0.1)'} onMouseLeave={e => e.target.style.background = 'rgba(255,255,255,0.05)'}>
                Sign In Instead →
@@ -85,7 +152,7 @@ export default function RegisterPage() {
         }} className="animate-in">
           
           <div style={{ marginBottom: 36 }}>
-            <h2 style={{ fontSize: 32, fontWeight: 900, marginBottom: 8, color: '#0f172a', letterSpacing: '-0.5px' }}>Create Account</h2>
+            <h2 style={{ fontSize: 32, fontWeight: 700, marginBottom: 8, color: '#0f172a', letterSpacing: '-0.5px' }}>Create Account</h2>
             <p style={{ color: '#64748b', fontSize: 16 }}>Select your primary role to customize your workspace.</p>
           </div>
 
@@ -96,7 +163,7 @@ export default function RegisterPage() {
               cursor: 'pointer', transition: 'all 0.2s', textAlign: 'center'
             }}>
               <div style={{ fontSize: 32, marginBottom: 12 }}>👤</div>
-              <div style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', marginBottom: 4 }}>Job Seeker</div>
+              <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>Job Seeker</div>
               <div style={{ fontSize: 12, color: '#64748b' }}>Calculate ATS scores & apply instantly</div>
             </div>
 
@@ -106,7 +173,7 @@ export default function RegisterPage() {
               cursor: 'pointer', transition: 'all 0.2s', textAlign: 'center'
             }}>
               <div style={{ fontSize: 32, marginBottom: 12 }}>🏢</div>
-              <div style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', marginBottom: 4 }}>HR Manager</div>
+              <div style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>HR Manager</div>
               <div style={{ fontSize: 12, color: '#64748b' }}>Post openings & securely filter talent</div>
             </div>
           </div>
@@ -118,6 +185,22 @@ export default function RegisterPage() {
           )}
 
           <form onSubmit={handleSubmit}>
+            <div style={{ marginBottom: 20 }}>
+              <label style={labelStyle}>Full Name</label>
+              <input style={inputStyle} type="text" placeholder="John Doe" required
+                value={form.full_name} onChange={e => setForm({ ...form, full_name: e.target.value })} 
+                onFocus={e => e.target.style.borderColor = form.role === 'hr' ? '#7c3aed' : '#10b981'} onBlur={e => e.target.style.borderColor = 'rgba(0,0,0,0.08)'} />
+            </div>
+
+            {form.role === 'hr' && (
+              <div style={{ marginBottom: 20 }} className="animate-in">
+                <label style={labelStyle}>Company Name</label>
+                <input style={inputStyle} type="text" placeholder="Acme Corp" required
+                  value={form.company_name} onChange={e => setForm({ ...form, company_name: e.target.value })} 
+                  onFocus={e => e.target.style.borderColor = '#7c3aed'} onBlur={e => e.target.style.borderColor = 'rgba(0,0,0,0.08)'} />
+              </div>
+            )}
+
             <div style={{ marginBottom: 24 }}>
               <label style={labelStyle}>Email Address</label>
               <input style={inputStyle} type="email" placeholder="you@company.com" required
@@ -143,7 +226,7 @@ export default function RegisterPage() {
             </div>
 
             <button type="submit" disabled={loading} style={{ 
-              width: '100%', padding: '16px', borderRadius: '16px', fontSize: 16, fontWeight: 800,
+              width: '100%', padding: '16px', borderRadius: '16px', fontSize: 16, fontWeight: 700,
               background: form.role === 'hr' ? 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)' : 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
               color: '#fff', border: 'none', cursor: loading ? 'not-allowed' : 'pointer',
               transition: 'all 0.3s', boxShadow: loading ? 'none' : (form.role === 'hr' ? '0 10px 25px rgba(124, 58, 237, 0.4)' : '0 10px 25px rgba(16, 185, 129, 0.4)')

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 export default function Footer() {
   return (
@@ -15,9 +15,9 @@ export default function Footer() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
               <div style={{ 
                 width: 32, height: 32, borderRadius: '8px', background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)', 
-                display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 900, fontSize: 18 
+                display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: 18 
               }}>S</div>
-              <span style={{ fontSize: 24, fontWeight: 900, letterSpacing: '-0.5px' }}>
+              <span style={{ fontSize: 24, fontWeight: 700, letterSpacing: '-0.5px' }}>
                 Smart<span style={{ color: '#a78bfa' }}>Resume</span>
               </span>
             </div>
@@ -27,7 +27,7 @@ export default function Footer() {
           </div>
 
           <div>
-             <h4 style={{ fontSize: 13, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 1, color: '#fff', marginBottom: 20 }}>Candidates</h4>
+             <h4 style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: '#fff', marginBottom: 20 }}>Candidates</h4>
              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                <Link to="/jobs" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: 15, fontWeight: 600, transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#94a3b8'}>Discover Open Roles</Link>
                <Link to="/register" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: 15, fontWeight: 600, transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#94a3b8'}>Create Student Hub</Link>
@@ -36,7 +36,7 @@ export default function Footer() {
           </div>
 
           <div>
-             <h4 style={{ fontSize: 13, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 1, color: '#fff', marginBottom: 20 }}>Companies</h4>
+             <h4 style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: '#fff', marginBottom: 20 }}>Companies</h4>
              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                <Link to="/register" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: 15, fontWeight: 600, transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#94a3b8'}>Create HR Dashboard</Link>
                <Link to="/login" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: 15, fontWeight: 600, transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = '#94a3b8'}>Post Active Jobs</Link>

@@ -4,12 +4,13 @@ import { login } from '../api';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const { loginUser } = useAuth();
   const navigate = useNavigate();
 
@@ -18,12 +19,17 @@ export default function LoginPage() {
     setError(''); setLoading(true);
     try {
       const res = await login(form);
-      loginUser(res.data);
-      toast.success('Welcome back!');
-      navigate(res.data.role === 'hr' ? '/hr/dashboard' : '/jobs');
+      // Start the fade transition
+      setIsLoggingIn(true);
+      
+      // Delay navigation to allow the fade effect to complete
+      setTimeout(() => {
+        loginUser(res.data);
+        toast.success('Welcome back!');
+        navigate(res.data.role === 'hr' ? '/hr/dashboard' : '/jobs');
+      }, 1500);
     } catch (err) {
       setError(err.response?.data?.detail || 'Invalid credentials. Please try again.');
-    } finally {
       setLoading(false);
     }
   };
@@ -41,7 +47,62 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ display: 'flex', minHeight: 'calc(100vh - 68px)', fontFamily, overflowX: 'hidden' }}>
+    <div style={{ display: 'flex', minHeight: 'calc(100vh - 68px)', fontFamily, position: 'relative', overflowX: 'hidden' }}>
+      
+      {/* Transition Overlay */}
+      <style>{`
+        @keyframes pulse {
+          0% { opacity: 0.6; transform: scale(0.98); }
+          50% { opacity: 1; transform: scale(1); }
+          100% { opacity: 0.6; transform: scale(0.98); }
+        }
+        @keyframes loadProgress {
+          0% { width: 0%; opacity: 0; }
+          10% { opacity: 1; }
+          100% { width: 100%; opacity: 1; }
+        }
+      `}</style>
+      
+      <div style={{
+        position: 'fixed',
+        top: 0, left: 0, width: '100vw', height: '100vh',
+        background: '#010409',
+        zIndex: 9999,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        transition: 'all 0.8s ease-in-out',
+        opacity: isLoggingIn ? 1 : 0,
+        pointerEvents: isLoggingIn ? 'all' : 'none',
+        color: '#fff',
+        fontFamily
+      }}>
+        <div style={{ 
+          textAlign: 'center',
+          animation: 'pulse 2s infinite'
+        }}>
+          <div style={{ fontSize: 44, marginBottom: 24, filter: 'drop-shadow(0 0 15px rgba(124, 58, 237, 0.5))' }}>🔐</div>
+          <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: '0.5px', marginBottom: 8 }}>
+            Logging in...
+          </div>
+          <p style={{ color: '#94a3b8', fontSize: 16, marginBottom: 32 }}>
+            Securing your session and preparing your dashboard
+          </p>
+
+          <div style={{ 
+            width: '280px', height: '2px', background: 'rgba(255,255,255,0.08)', 
+            borderRadius: '1px', margin: '0 auto', overflow: 'hidden'
+          }}>
+            <div style={{ 
+              height: '100%', 
+              background: 'linear-gradient(90deg, #7c3aed, #3b82f6, #7c3aed)',
+              backgroundSize: '200% 100%',
+              animation: 'loadProgress 1.4s ease-in-out forwards'
+            }} />
+          </div>
+        </div>
+      </div>
       
       {/* Left Premium Panel */}
       <div style={{
@@ -56,7 +117,7 @@ export default function LoginPage() {
         <div style={{ maxWidth: 380, position: 'relative', zIndex: 1 }} className="animate-in">
           <div style={{ width: 64, height: 6, background: 'linear-gradient(90deg, #7c3aed 0%, #4f46e5 100%)', borderRadius: 3, marginBottom: 40 }} />
           
-          <h1 style={{ fontSize: 44, fontWeight: 900, color: '#fff', lineHeight: 1.1, marginBottom: 20, letterSpacing: '-1px' }}>
+          <h1 style={{ fontSize: 44, fontWeight: 700, color: '#fff', lineHeight: 1.1, marginBottom: 20, letterSpacing: '-1px' }}>
             Welcome back to the Future of Hiring.
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16, lineHeight: 1.7, marginBottom: 56 }}>
@@ -67,7 +128,7 @@ export default function LoginPage() {
             <p style={{ color: '#94a3b8', fontSize: 14, marginBottom: 16, fontWeight: 600 }}>Don't have an account?</p>
             <Link to="/register" style={{ 
               display: 'inline-block', padding: '12px 24px', borderRadius: '12px', background: 'rgba(255,255,255,0.05)',
-              color: '#fff', textDecoration: 'none', fontWeight: 800, border: '1px solid rgba(255,255,255,0.1)',
+              color: '#fff', textDecoration: 'none', fontWeight: 700, border: '1px solid rgba(255,255,255,0.1)',
               transition: 'all 0.2s', fontSize: 14
             }} onMouseEnter={e => e.target.style.background = 'rgba(255,255,255,0.1)'} onMouseLeave={e => e.target.style.background = 'rgba(255,255,255,0.05)'}>
               Create Account →
@@ -87,7 +148,7 @@ export default function LoginPage() {
         }} className="animate-in">
           
           <div style={{ marginBottom: 40 }}>
-            <h2 style={{ fontSize: 32, fontWeight: 900, marginBottom: 8, color: '#0f172a', letterSpacing: '-0.5px' }}>Sign In</h2>
+            <h2 style={{ fontSize: 32, fontWeight: 700, marginBottom: 8, color: '#0f172a', letterSpacing: '-0.5px' }}>Sign In</h2>
             <p style={{ color: '#64748b', fontSize: 16 }}>Enter your email and password to securely log in.</p>
           </div>
 
@@ -114,7 +175,7 @@ export default function LoginPage() {
 
             <button type="submit" disabled={loading} style={{ 
               width: '100%', padding: '16px', borderRadius: '16px', background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)',
-              color: '#fff', border: 'none', fontSize: 16, fontWeight: 800, cursor: loading ? 'not-allowed' : 'pointer',
+              color: '#fff', border: 'none', fontSize: 16, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer',
               transition: 'all 0.3s', boxShadow: loading ? 'none' : '0 10px 25px rgba(124, 58, 237, 0.4)'
             }} onMouseEnter={e => { if(!loading) { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 15px 35px rgba(124, 58, 237, 0.5)'; } }} 
                onMouseLeave={e => { if(!loading) { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 25px rgba(124, 58, 237, 0.4)'; } }}>
@@ -124,13 +185,13 @@ export default function LoginPage() {
 
           <div style={{ display: 'flex', alignItems: 'center', margin: '32px 0' }}>
             <div style={{ flex: 1, height: 1, background: '#e2e8f0' }} />
-            <div style={{ padding: '0 16px', fontSize: 12, fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.5 }}>New User?</div>
+            <div style={{ padding: '0 16px', fontSize: 12, fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.5 }}>New User?</div>
             <div style={{ flex: 1, height: 1, background: '#e2e8f0' }} />
           </div>
 
           <p style={{ textAlign: 'center', color: '#64748b', fontSize: 15, margin: 0 }}>
             Don't have an account yet?{' '}
-            <Link to="/register" style={{ color: '#7c3aed', fontWeight: 800, textDecoration: 'none' }}>Register here</Link>
+            <Link to="/register" style={{ color: '#7c3aed', fontWeight: 700, textDecoration: 'none' }}>Register here</Link>
           </p>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getHRAnalytics } from '../../api';
 import { Link } from 'react-router-dom';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 export default function HRAnalyticsPage() {
   const [data, setData] = useState(null);
@@ -49,11 +49,8 @@ export default function HRAnalyticsPage() {
                 <span>/</span>
                 <span style={{ color: '#0f172a' }}>Reports & Analytics</span>
               </div>
-              <h1 style={{ fontSize: window.innerWidth < 768 ? 32 : 44, fontWeight: 900, color: '#0f172a', letterSpacing: '-1px', marginBottom: 12 }}>
-                Reports & <span style={{ 
-                  background: 'linear-gradient(135deg, #10b981 0%, #0ea5e9 100%)',
-                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
-                }}>Analytics</span>
+              <h1 style={{ fontSize: window.innerWidth < 768 ? 24 : 32, fontWeight: 700, color: '#0f172a', letterSpacing: '-1px', marginBottom: 12 }}>
+                Reports & <span style={{ color: '#2563eb' }}>Analytics</span>
               </h1>
               <p style={{ fontSize: 16, color: '#64748b', margin: 0 }}>
                 Comprehensive insights on your pipeline, jobs performance, and AI optimizations.
@@ -83,10 +80,10 @@ export default function HRAnalyticsPage() {
               borderRadius: '20px', padding: '24px 28px',
               border: '1px solid rgba(0,0,0,0.03)', boxShadow: '0 10px 30px rgba(0,0,0,0.02)'
             }}>
-              <div style={{ fontSize: 36, fontWeight: 900, color: '#0f172a', marginBottom: 4, background: `linear-gradient(135deg, #0f172a 0%, ${stat.c} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              <div style={{ fontSize: 24, fontWeight: 700, color: '#0f172a', marginBottom: 4, background: `linear-gradient(135deg, #0f172a 0%, ${stat.c} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 {stat.value || 0}
               </div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.8 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.8 }}>
                 {stat.label}
               </div>
             </div>
@@ -109,7 +106,7 @@ export default function HRAnalyticsPage() {
               background: 'radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%)',
               borderRadius: '50%'
             }}/>
-            <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 32, position: 'relative', color: '#ffffff' }}>
+            <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 32, position: 'relative', color: '#ffffff' }}>
               ATS Funnel Conversion
             </h2>
 
@@ -122,7 +119,7 @@ export default function HRAnalyticsPage() {
               ].map((item, i, arr) => (
                 <React.Fragment key={i}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
-                    <div style={{ fontSize: 32, fontWeight: 900, marginBottom: 8, color: '#ffffff' }}>
+                    <div style={{ fontSize: 24, fontWeight: 700, marginBottom: 8, color: '#ffffff' }}>
                       {item.value || 0}
                     </div>
                     <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5, color: '#94a3b8' }}>
@@ -145,7 +142,7 @@ export default function HRAnalyticsPage() {
             border: '1px solid rgba(0,0,0,0.04)', boxShadow: '0 10px 40px rgba(0,0,0,0.02)',
             animationDelay: '0.4s'
           }}>
-            <h2 style={{ fontSize: 20, fontWeight: 800, color: '#0f172a', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 10 }}>
+            <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0f172a', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ fontSize: 24 }}>🧠</span> AI Insights
             </h2>
             
@@ -170,7 +167,7 @@ export default function HRAnalyticsPage() {
 
         {/* 📋 JOB PERFORMANCE TABLE */}
         <div className="animate-in" style={{ marginBottom: 40, animationDelay: '0.5s' }}>
-          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', marginBottom: 20 }}>Job Performance</h2>
+          <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', marginBottom: 20 }}>Job Performance</h2>
 
           <div style={{
             background: '#fff', borderRadius: '24px',
@@ -222,7 +219,7 @@ export default function HRAnalyticsPage() {
 const th = {
   padding: '18px 24px',
   fontSize: 12,
-  fontWeight: 800,
+  fontWeight: 700,
   color: '#64748b',
   textTransform: 'uppercase',
   letterSpacing: 0.8,

@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { createJob } from '../../api';
 import { toast } from 'react-toastify';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 const INITIAL = {
   title: '', company: '', location: '', job_type: 'Full-time',
@@ -76,13 +76,13 @@ export default function CreateJobPage() {
   };
 
   const btnPrimary = {
-    borderRadius: '14px', padding: '14px 24px', fontSize: 15, fontWeight: 800,
+    borderRadius: '14px', padding: '14px 24px', fontSize: 15, fontWeight: 700,
     background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)', border: 'none', color: '#fff',
     cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 8px 20px rgba(124, 58, 237, 0.2)'
   };
   
   const btnSecondary = {
-    borderRadius: '14px', padding: '14px 24px', fontSize: 15, fontWeight: 800,
+    borderRadius: '14px', padding: '14px 24px', fontSize: 15, fontWeight: 700,
     background: '#f1f5f9', border: '1px solid #e2e8f0', color: '#475569',
     cursor: 'pointer', transition: 'all 0.2s'
   };
@@ -114,7 +114,7 @@ export default function CreateJobPage() {
               <span>/</span>
               <span style={{ color: '#0f172a' }}>New Job</span>
             </div>
-            <h1 style={{ fontSize: window.innerWidth < 768 ? 32 : 44, fontWeight: 900, color: '#0f172a', letterSpacing: '-1px', marginBottom: 12 }}>
+            <h1 style={{ fontSize: window.innerWidth < 768 ? 24 : 32, fontWeight: 700, color: '#0f172a', letterSpacing: '-1px', marginBottom: 12 }}>
               Post a <span style={{ 
                 background: 'linear-gradient(135deg, #7c3aed 0%, #0ea5e9 100%)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
@@ -138,7 +138,7 @@ export default function CreateJobPage() {
             <div className="animate-in" style={{ display: 'flex', gap: 12, marginBottom: 32, overflowX: 'auto', paddingBottom: 10 }}>
               {sections.map(s => (
                 <button key={s.id} onClick={() => setActiveSection(s.id)} type="button" style={{
-                  padding: '12px 24px', borderRadius: '16px', fontSize: 14, fontWeight: 800, cursor: 'pointer',
+                  padding: '12px 24px', borderRadius: '16px', fontSize: 14, fontWeight: 700, cursor: 'pointer',
                   border: activeSection === s.id ? 'none' : '1px solid #e2e8f0', whiteSpace: 'nowrap',
                   background: activeSection === s.id ? '#7c3aed' : '#ffffff',
                   color: activeSection === s.id ? '#ffffff' : '#64748b',
@@ -164,7 +164,7 @@ export default function CreateJobPage() {
               {/* Basic Info */}
               {activeSection === 'basic' && (
                 <div className="animate-in" style={cardStyle}>
-                  <h2 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', marginBottom: 24 }}>Basic Information</h2>
+                  <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', marginBottom: 24 }}>Basic Information</h2>
                   
                   <div style={{ marginBottom: 20 }}>
                     <label style={labelStyle}>Job Title *</label>
@@ -229,7 +229,7 @@ export default function CreateJobPage() {
               {/* Job Details & ATS */}
               {activeSection === 'details' && (
                 <div className="animate-in" style={cardStyle}>
-                  <h2 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', marginBottom: 24 }}>Screening Configuration</h2>
+                  <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', marginBottom: 24 }}>Screening Configuration</h2>
                   
                   <div style={{ marginBottom: 24 }}>
                     <label style={labelStyle}>Required Skills (ATS Keywords) *</label>
@@ -299,7 +299,7 @@ export default function CreateJobPage() {
               {/* Description */}
               {activeSection === 'description' && (
                 <div className="animate-in" style={cardStyle}>
-                  <h2 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', marginBottom: 24 }}>Posting Content</h2>
+                  <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', marginBottom: 24 }}>Posting Content</h2>
                   
                   <div style={{ marginBottom: 24 }}>
                     <label style={labelStyle}>Job Description *</label>
@@ -321,13 +321,13 @@ export default function CreateJobPage() {
                   <div style={{ display: 'flex', gap: 16 }}>
                     <button type="button" style={btnSecondary} onClick={() => setActiveSection('details')}>← Back</button>
                     <button type="submit" disabled={loading} style={{ 
-                      flex: 1, borderRadius: '14px', padding: '14px 24px', fontSize: 16, fontWeight: 800,
+                      flex: 1, borderRadius: '14px', padding: '14px 24px', fontSize: 16, fontWeight: 700,
                       background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', border: 'none', color: '#fff',
                       cursor: loading ? 'not-allowed' : 'pointer', transition: 'all 0.3s',
                       boxShadow: '0 10px 25px rgba(16, 185, 129, 0.3)'
                     }} onMouseEnter={e => { if(!loading) { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 15px 35px rgba(16, 185, 129, 0.4)'; } }} 
                        onMouseLeave={e => { if(!loading) { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 25px rgba(16, 185, 129, 0.3)'; } }}>
-                      {loading ? 'Publishing...' : '🚀 Publish Job Posting'}
+                      {loading ? 'Publishing...' : ' Publish Job Posting'}
                     </button>
                   </div>
                 </div>
@@ -343,11 +343,11 @@ export default function CreateJobPage() {
                 background: '#fff', borderRadius: '24px', padding: '32px',
                 border: '1px solid rgba(0,0,0,0.04)', boxShadow: '0 20px 50px rgba(0,0,0,0.04)'
               }}>
-                <div style={{ fontSize: 11, fontWeight: 800, color: '#94a3b8', letterSpacing: 0.8, textTransform: 'uppercase', marginBottom: 20 }}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: 0.8, textTransform: 'uppercase', marginBottom: 20 }}>
                   Candidate View Preview
                 </div>
                 
-                <h3 style={{ fontSize: 22, fontWeight: 800, color: form.title ? '#0f172a' : '#cbd5e1', marginBottom: 12, lineHeight: 1.3 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: form.title ? '#0f172a' : '#cbd5e1', marginBottom: 12, lineHeight: 1.3 }}>
                   {form.title || 'Job Title Goes Here'}
                 </h3>
                 
@@ -383,7 +383,7 @@ export default function CreateJobPage() {
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 14 }}>
                   <span style={{ color: '#64748b', fontWeight: 600 }}>ATS Cutoff Limit</span>
-                  <span style={{ fontWeight: 900, color: '#7c3aed', fontSize: 20 }}>{form.ats_threshold}%</span>
+                  <span style={{ fontWeight: 700, color: '#7c3aed', fontSize: 20 }}>{form.ats_threshold}%</span>
                 </div>
               </div>
 
@@ -397,7 +397,7 @@ export default function CreateJobPage() {
                   position: 'absolute', top: '-10%', right: '-10%', width: 120, height: 120,
                   background: 'radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, transparent 70%)', borderRadius: '50%'
                 }}/>
-                <div style={{ fontWeight: 800, marginBottom: 16, fontSize: 18, color: '#fff', position: 'relative' }}>
+                <div style={{ fontWeight: 700, marginBottom: 16, fontSize: 16, color: '#fff', position: 'relative' }}>
                   Step {sections.findIndex(s => s.id === activeSection) + 1} of 3
                 </div>
                 <div style={{ position: 'relative', height: 6, background: 'rgba(255,255,255,0.1)', borderRadius: 3, marginBottom: 16 }}>

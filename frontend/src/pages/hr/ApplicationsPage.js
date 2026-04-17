@@ -8,7 +8,7 @@ import {
 } from '../../api';
 import { toast } from 'react-toastify';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 const STATUS_MAP = {
   applied:     { label: 'Pending Upload',  bg: '#f1f5f9', color: '#64748b', icon: '📝' },
@@ -49,7 +49,7 @@ function SelectModal({ app, onClose, onDone }) {
       }} onClick={e => e.stopPropagation()}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
           <div>
-            <h3 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>Confirm Selection</h3>
+            <h3 style={{ fontSize: 24, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>Confirm Selection</h3>
             <p style={{ color: '#64748b', fontSize: 14 }}>
               This will update the candidate's status and send a congratulation email automatically.
             </p>
@@ -70,12 +70,12 @@ function SelectModal({ app, onClose, onDone }) {
           padding: '20px', marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center'
         }}>
           <div>
-            <div style={{ fontWeight: 800, fontSize: 18, color: '#0f172a', marginBottom: 4 }}>{app.student_name}</div>
+            <div style={{ fontWeight: 700, fontSize: 18, color: '#0f172a', marginBottom: 4 }}>{app.student_name}</div>
             <div style={{ fontSize: 13, color: '#64748b' }}>{app.student_email}</div>
           </div>
           {app.ats_score != null && (
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: 24, fontWeight: 900, color: '#10b981' }}>{app.ats_score.toFixed(1)}%</div>
+              <div style={{ fontSize: 24, fontWeight: 700, color: '#10b981' }}>{app.ats_score.toFixed(1)}%</div>
               <div style={{ fontSize: 11, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.5, fontWeight: 700 }}>ATS Score</div>
             </div>
           )}
@@ -208,7 +208,7 @@ export default function ApplicationsPage() {
                 <span>/</span>
                 <span style={{ color: '#0f172a' }}>Job #{jobId}</span>
               </div>
-              <h1 style={{ fontSize: window.innerWidth < 768 ? 32 : 44, fontWeight: 900, color: '#0f172a', letterSpacing: '-1px', marginBottom: 12 }}>
+              <h1 style={{ fontSize: window.innerWidth < 768 ? 24 : 32, fontWeight: 700, color: '#0f172a', letterSpacing: '-1px', marginBottom: 12 }}>
                 Candidate <span style={{ 
                   background: 'linear-gradient(135deg, #7c3aed 0%, #0ea5e9 100%)',
                   WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
@@ -252,14 +252,14 @@ export default function ApplicationsPage() {
             <div key={s.l} className="animate-in" style={{
               animationDelay: `${0.1 + (i * 0.05)}s`,
               background: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(16px)',
-              borderRadius: '20px', padding: '24px 28px',
+              borderRadius: '16px', padding: '20px 24px',
               border: '1px solid rgba(0,0,0,0.03)', boxShadow: '0 10px 30px rgba(0,0,0,0.02)',
               position: 'relative', overflow: 'hidden'
             }}>
-              <div style={{ fontSize: 32, fontWeight: 900, color: '#0f172a', marginBottom: 4, background: `linear-gradient(135deg, #0f172a 0%, ${s.c} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              <div style={{ fontSize: 24, fontWeight: 700, color: '#0f172a', marginBottom: 4, background: `linear-gradient(135deg, #0f172a 0%, ${s.c} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 {s.v}
               </div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.8 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.8 }}>
                 {s.l}
               </div>
             </div>
@@ -294,7 +294,7 @@ export default function ApplicationsPage() {
             boxShadow: '0 10px 40px rgba(0,0,0,0.02)', animationDelay: '0.4s'
           }}>
             <div style={{ fontSize: 48, marginBottom: 20 }}>📭</div>
-            <h3 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', marginBottom: 12 }}>No applications in this category</h3>
+            <h3 style={{ fontSize: 24, fontWeight: 700, color: '#0f172a', marginBottom: 12 }}>No applications in this category</h3>
             <p style={{ fontSize: 16, color: '#64748b' }}>Try selecting a different filter above.</p>
           </div>
         ) : (
@@ -321,17 +321,17 @@ export default function ApplicationsPage() {
                     
                     {/* Rank Number */}
                     <div style={{
-                      width: 36, height: 36, borderRadius: '10px', background: '#f1f5f9',
+                      width: 28, height: 28, borderRadius: '8px', background: '#f1f5f9',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: 14, fontWeight: 800, color: '#94a3b8', flexShrink: 0
+                      fontSize: 12, fontWeight: 700, color: '#94a3b8', flexShrink: 0
                     }}>
                       {idx + 1}
                     </div>
 
                     {/* Name & Title */}
                     <div style={{ flex: '2 1 200px' }}>
-                      <div style={{ fontWeight: 800, fontSize: 18, color: '#0f172a', marginBottom: 4 }}>{app.student_name}</div>
-                      <div style={{ fontSize: 13, color: '#64748b' }}>{app.student_email}</div>
+                      <div style={{ fontWeight: 700, fontSize: 16, color: '#0f172a', marginBottom: 4 }}>{app.student_name}</div>
+                      <div style={{ fontSize: 12, color: '#64748b' }}>{app.student_email}</div>
                     </div>
 
                     {/* ATS Score */}
@@ -339,13 +339,13 @@ export default function ApplicationsPage() {
                       {app.ats_score != null ? (
                         <>
                           <div style={{
-                            fontSize: 24, fontWeight: 900,
+                            fontSize: 20, fontWeight: 700,
                             color: app.ats_score >= 80 ? '#10b981' : '#f59e0b',
                             lineHeight: 1, marginBottom: 4
                           }}>
                             {app.ats_score.toFixed(1)}%
                           </div>
-                          <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                          <div style={{ fontSize: 10, fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.5 }}>
                             ATS Match
                           </div>
                         </>
@@ -404,7 +404,7 @@ export default function ApplicationsPage() {
                       )}
                       
                       {app.status === 'selected' && (
-                        <span style={{ color: '#10b981', fontSize: 14, fontWeight: 800 }}>✅ Hired</span>
+                        <span style={{ color: '#10b981', fontSize: 14, fontWeight: 700 }}>✅ Hired</span>
                       )}
 
                       <div style={{
@@ -429,7 +429,7 @@ export default function ApplicationsPage() {
                       }}>
                         
                         <div>
-                          <div style={{ fontSize: 11, fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.8, marginBottom: 12 }}>Personal Details</div>
+                          <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.8, marginBottom: 12 }}>Personal Details</div>
                           <div style={{ fontSize: 14, color: '#0f172a', marginBottom: 8 }}><strong>Name:</strong> {app.student_name}</div>
                           <div style={{ fontSize: 14, color: '#0f172a', marginBottom: 8 }}><strong>Email:</strong> {app.student_email}</div>
                           <div style={{ fontSize: 14, color: '#0f172a', marginBottom: 8 }}><strong>DOB:</strong> {app.date_of_birth}</div>
@@ -437,7 +437,7 @@ export default function ApplicationsPage() {
                         </div>
 
                         <div>
-                          <div style={{ fontSize: 11, fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.8, marginBottom: 12 }}>Application Tracking</div>
+                          <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.8, marginBottom: 12 }}>Application Tracking</div>
                           <div style={{ fontSize: 14, color: '#0f172a', marginBottom: 8 }}>
                             <strong>Date Applied:</strong> {new Date(app.applied_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}
                           </div>
@@ -461,7 +461,7 @@ export default function ApplicationsPage() {
                         </div>
 
                         <div>
-                          <div style={{ fontSize: 11, fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.8, marginBottom: 12 }}>ATS Score Breakdown</div>
+                          <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 0.8, marginBottom: 12 }}>ATS Score Breakdown</div>
                           {app.ats_score != null ? (
                             <>
                               <div style={{ marginBottom: 12 }}>

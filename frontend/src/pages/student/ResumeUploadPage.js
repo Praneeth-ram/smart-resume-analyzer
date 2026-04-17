@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import { uploadResume } from '../../api';
 import { toast } from 'react-toastify';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 function ScoreRing({ score, passed }) {
   const r = 70; const cx = 80; const cy = 80;
@@ -21,8 +21,8 @@ function ScoreRing({ score, passed }) {
           strokeLinecap="round" style={{ transition: 'stroke-dashoffset 1.4s cubic-bezier(0.4,0,0.2,1)' }} />
       </svg>
       <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ fontSize: 36, fontWeight: 900, color, lineHeight: 1 }}>{score.toFixed(0)}%</div>
-        <div style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 1, color: '#64748b', marginTop: 4 }}>Match</div>
+        <div style={{ fontSize: 36, fontWeight: 700, color, lineHeight: 1 }}>{score.toFixed(0)}%</div>
+        <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: '#64748b', marginTop: 4 }}>Match</div>
       </div>
     </div>
   );
@@ -37,7 +37,7 @@ function ATSResult({ result, onBack }) {
       }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1, textAlign: 'center', color: '#fff' }}>
           <div className="animate-in">
-            <h1 style={{ fontSize: window.innerWidth < 768 ? 32 : 44, fontWeight: 900, marginBottom: 16 }}>
+            <h1 style={{ fontSize: window.innerWidth < 768 ? 32 : 44, fontWeight: 700, marginBottom: 16, color: '#fff' }}>
               AI Parsing <span style={{ color: result.passed ? '#34d399' : '#f87171' }}>Result</span>
             </h1>
             <p style={{ fontSize: 16, color: '#cbd5e1', margin: 0 }}>Review how your resume stands against the role requirements.</p>
@@ -58,14 +58,14 @@ function ATSResult({ result, onBack }) {
               <div style={{ marginTop: 32 }}>
                 {result.passed ? (
                   <div>
-                    <div style={{ fontSize: 24, fontWeight: 900, color: '#10b981', marginBottom: 10 }}>✅ Outstanding! You Passed.</div>
+                    <div style={{ fontSize: 24, fontWeight: 700, color: '#10b981', marginBottom: 10 }}>✅ Outstanding! You Passed.</div>
                     <p style={{ color: '#475569', fontSize: 15, lineHeight: 1.6, margin: '0 auto', maxWidth: 350 }}>
                       Your resume has been forwarded directly to HR. Sit tight—you exceeded the strict <strong>{result.threshold}%</strong> cutoff threshold.
                     </p>
                   </div>
                 ) : (
                   <div>
-                    <div style={{ fontSize: 24, fontWeight: 900, color: '#ef4444', marginBottom: 10 }}>⛔ Below Threshold</div>
+                    <div style={{ fontSize: 24, fontWeight: 700, color: '#ef4444', marginBottom: 10 }}>⛔ Below Threshold</div>
                     <p style={{ color: '#475569', fontSize: 15, lineHeight: 1.6, margin: '0 auto', maxWidth: 350 }}>
                       Your resume score was <strong>{result.ats_score.toFixed(1)}%</strong> which is below the strictly required <strong>{result.threshold}%</strong> limit. Review the missing skill gaps carefully.
                     </p>
@@ -75,7 +75,7 @@ function ATSResult({ result, onBack }) {
 
               {/* Progress bar */}
               <div style={{ marginTop: 40 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, fontWeight: 800, color: '#64748b', marginBottom: 12 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, fontWeight: 700, color: '#64748b', marginBottom: 12 }}>
                   <span>Your Score: {result.ats_score.toFixed(1)}%</span>
                   <span>Target: {result.threshold}%</span>
                 </div>
@@ -111,7 +111,7 @@ function ATSResult({ result, onBack }) {
                 border: '1px solid rgba(0,0,0,0.04)', boxShadow: '0 20px 50px rgba(0,0,0,0.04)',
                 borderLeft: '4px solid #10b981', animationDelay: '0.2s'
               }}>
-                <h3 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 20 }}>✅ Matched Skills ({result.matched_skills.length})</h3>
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 20 }}>✅ Matched Skills ({result.matched_skills.length})</h3>
                 {result.matched_skills.length === 0 ? (
                   <p style={{ color: '#94a3b8', fontSize: 14 }}>No skills matched from the required list.</p>
                 ) : (
@@ -128,7 +128,7 @@ function ATSResult({ result, onBack }) {
                 border: '1px solid rgba(0,0,0,0.04)', boxShadow: '0 20px 50px rgba(0,0,0,0.04)',
                 borderLeft: '4px solid #ef4444', animationDelay: '0.3s'
               }}>
-                <h3 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 20 }}>❌ Missing Skills ({result.missing_skills.length})</h3>
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 20 }}>❌ Missing Skills ({result.missing_skills.length})</h3>
                 {result.missing_skills.length === 0 ? (
                   <p style={{ color: '#94a3b8', fontSize: 14 }}>Wow! You hit every single critical requirement.</p>
                 ) : (
@@ -221,7 +221,7 @@ export default function ResumeUploadPage() {
               <span style={{ color: '#0f172a' }}>Upload</span>
             </div>
             
-            <h1 style={{ fontSize: window.innerWidth < 768 ? 32 : 44, fontWeight: 900, color: '#0f172a', letterSpacing: '-1px', marginBottom: 16 }}>
+            <h1 style={{ fontSize: window.innerWidth < 768 ? 24 : 32, fontWeight: 700, color: '#0f172a', letterSpacing: '-1px', marginBottom: 16 }}>
               Upload Your <span style={{ 
                 background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
@@ -273,12 +273,12 @@ export default function ResumeUploadPage() {
                 </div>
                 {file ? (
                   <>
-                    <div style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 8 }}>{file.name}</div>
+                    <div style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>{file.name}</div>
                     <div style={{ fontSize: 14, color: '#64748b' }}>{(file.size / 1024).toFixed(1)} KB • Click or drag to replace</div>
                   </>
                 ) : (
                   <>
-                    <div style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 8 }}>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>
                       {isDragActive ? 'Release to drop your resume!' : 'Drag & drop your resume here'}
                     </div>
                     <div style={{ fontSize: 14, color: '#64748b' }}>or click to browse local files — PDF, DOCX, TXT completely supported</div>
@@ -287,7 +287,7 @@ export default function ResumeUploadPage() {
               </div>
 
               <button disabled={!file || uploading} onClick={handleUpload} style={{ 
-                width: '100%', borderRadius: '16px', padding: '18px', fontSize: 18, fontWeight: 800,
+                width: '100%', borderRadius: '16px', padding: '18px', fontSize: 18, fontWeight: 700,
                 background: (!file || uploading) ? '#e2e8f0' : 'linear-gradient(135deg, #10b981 0%, #059669 100%)', 
                 border: 'none', color: (!file || uploading) ? '#94a3b8' : '#fff',
                 cursor: (!file || uploading) ? 'not-allowed' : 'pointer', transition: 'all 0.3s',
@@ -312,7 +312,7 @@ export default function ResumeUploadPage() {
                 border: '1px solid rgba(0,0,0,0.04)', boxShadow: '0 20px 50px rgba(0,0,0,0.04)',
                 animationDelay: '0.2s'
               }}>
-                <h3 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 24 }}>How Scoring Works</h3>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 20 }}>How Scoring Works</h3>
                 
                 {[
                   ['40%', 'Skill Match', 'Checks explicitly requested technologies and skills against your summary and entries.'],
@@ -322,10 +322,10 @@ export default function ResumeUploadPage() {
                   <div key={title} style={{ display: 'flex', gap: 16, marginBottom: 20, paddingBottom: 20, borderBottom: '1px solid #f1f5f9' }}>
                     <div style={{
                       background: 'rgba(124, 58, 237, 0.1)', color: '#7c3aed', width: 48, height: 48, borderRadius: '12px',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 900, flexShrink: 0
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 700, flexShrink: 0
                     }}>{pct}</div>
                     <div>
-                      <div style={{ fontWeight: 800, color: '#0f172a', marginBottom: 4 }}>{title}</div>
+                      <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: 4 }}>{title}</div>
                       <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5 }}>{desc}</div>
                     </div>
                   </div>
@@ -339,7 +339,7 @@ export default function ResumeUploadPage() {
               }}>
                 <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: 120, height: 120, background: 'radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%)', borderRadius: '50%' }}/>
                 
-                <h3 style={{ fontWeight: 800, marginBottom: 16, fontSize: 18, color: '#fff', position: 'relative' }}>💡 Tips for a Higher Score</h3>
+                <h3 style={{ fontWeight: 700, marginBottom: 16, fontSize: 16, color: '#fff', position: 'relative' }}>💡 Tips for a Higher Score</h3>
                 {[
                   'Ensure your PDF has selectable text (not an image scan)',
                   'Mirror technical keywords exactly directly from the description',
@@ -347,7 +347,7 @@ export default function ResumeUploadPage() {
                   'Follow standard resume formatting',
                 ].map(tip => (
                   <div key={tip} style={{ display: 'flex', gap: 12, fontSize: 13, color: '#cbd5e1', marginBottom: 12, lineHeight: 1.6, position: 'relative' }}>
-                    <span style={{ color: '#10b981', fontWeight: 900, fontSize: 16 }}>›</span>
+                    <span style={{ color: '#10b981', fontWeight: 700, fontSize: 16 }}>›</span>
                     {tip}
                   </div>
                 ))}

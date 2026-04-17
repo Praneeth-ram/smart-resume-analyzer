@@ -2,11 +2,11 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 const STATS = [
   { value: '2.1s', label: 'Analysis Time' },
-  { value: '80%', label: 'Default Threshold' },
+  { value: '100%', label: 'Accurate Results' },
   { value: '100%', label: 'Automated Parsing' },
   { value: '3-Step', label: 'Clear Process' },
 ];
@@ -14,7 +14,7 @@ const STATS = [
 export default function LandingPage() {
   const navigate = useNavigate();
 
-  return (
+  return (  
     <div style={{ fontFamily, overflowX: 'hidden' }}>
       
       {/* Premium Hero Section */}
@@ -53,26 +53,26 @@ export default function LandingPage() {
               padding: '8px 20px', marginBottom: 36, borderRadius: '30px', backdropFilter: 'blur(10px)'
             }}>
               <span style={{ width: 8, height: 8, background: '#10b981', borderRadius: '50%', display: 'inline-block', boxShadow: '0 0 10px #10b981' }} />
-              <span style={{ fontSize: 13, fontWeight: 800, color: '#e2e8f0', letterSpacing: '1px', textTransform: 'uppercase' }}>
+              <span style={{ fontSize: 13, fontWeight: 700, color: '#e2e8f0', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                 Next-Gen AI Hiring Intelligence
               </span>
             </div>
 
-            <h1 style={{ fontSize: 'clamp(48px, 6vw, 84px)', fontWeight: 900, color: '#fff', lineHeight: 1.05, marginBottom: 32, letterSpacing: '-2px' }}>
+            <h1 style={{ fontSize: 'clamp(36px, 5vw, 64px)', fontWeight: 700, color: '#fff', lineHeight: 1.05, marginBottom: 32, letterSpacing: '-2px' }}>
               Hire the Right Talent,<br />
               <span style={{ 
                 background: 'linear-gradient(135deg, #a78bfa 0%, #34d399 100%)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
-              }}>Immeasurably Faster.</span>
+              }}>Faster.</span>
             </h1>
 
-            <p style={{ fontSize: 20, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6, maxWidth: 600, marginBottom: 48, fontWeight: 500 }}>
-              SmartResume utilizes localized Natural Language Processing models to aggressively evaluate resumes against specific job requirements. Ensuring exactly the right candidate, every time.
+            <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6, maxWidth: 600, marginBottom: 48, fontWeight: 500 }}>
+              SmartResume helps you identify the most suitable applicants for your job—saving time, reducing effort, and improving hiring decisions.
             </p>
 
             <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
               <button style={{ 
-                  borderRadius: '16px', padding: '18px 36px', fontSize: 18, fontWeight: 800,
+                  borderRadius: '16px', padding: '18px 36px', fontSize: 18, fontWeight: 700,
                   background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)', border: 'none', color: '#fff',
                   cursor: 'pointer', transition: 'all 0.3s', boxShadow: '0 10px 25px rgba(124, 58, 237, 0.4)',
                   display: 'flex', alignItems: 'center', gap: 12
@@ -83,7 +83,7 @@ export default function LandingPage() {
                 <span style={{ fontSize: 22 }}>›</span>
               </button>
               <button style={{ 
-                  borderRadius: '16px', padding: '18px 36px', fontSize: 18, fontWeight: 800,
+                  borderRadius: '16px', padding: '18px 36px', fontSize: 18, fontWeight: 700,
                   background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff',
                   cursor: 'pointer', transition: 'all 0.3s'
                 }} onClick={() => navigate('/register')} 
@@ -102,7 +102,7 @@ export default function LandingPage() {
           }} className="animate-in delay-2">
             {STATS.map((s, i) => (
               <div key={s.label} style={{ flex: '1 1 200px', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ fontSize: 48, fontWeight: 900, color: '#fff', lineHeight: 1, marginBottom: 8 }}>{s.value}</div>
+                <div style={{ fontSize: 36, fontWeight: 700, color: '#fff', lineHeight: 1, marginBottom: 8 }}>{s.value}</div>
                 <div style={{ fontSize: 14, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700 }}>{s.label}</div>
               </div>
             ))}
@@ -116,14 +116,14 @@ export default function LandingPage() {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 80, alignItems: 'start' }}>
             
             <div style={{ flex: '1 1 400px' }}>
-              <div style={{ display: 'inline-block', background: 'rgba(124, 58, 237, 0.1)', color: '#7c3aed', padding: '8px 16px', borderRadius: '20px', fontSize: 13, fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', marginBottom: 20 }}>The Architecture</div>
-              <h2 style={{ fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 900, color: '#0f172a', marginBottom: 24, lineHeight: 1.1, letterSpacing: '-1px' }}>How Our Engine Works</h2>
-              <p style={{ color: '#475569', fontSize: 18, lineHeight: 1.8, marginBottom: 40, fontWeight: 500 }}>
+              <div style={{ display: 'inline-block', background: 'rgba(124, 58, 237, 0.1)', color: '#7c3aed', padding: '8px 16px', borderRadius: '20px', fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', marginBottom: 20 }}>The Architecture</div>
+              <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 40px)', fontWeight: 700, color: '#0f172a', marginBottom: 20, lineHeight: 1.1, letterSpacing: '-1px' }}>How Our Engine Works</h2>
+              <p style={{ color: '#475569', fontSize: 16, lineHeight: 1.8, marginBottom: 40, fontWeight: 500 }}>
                 Stop parsing through unqualified resumes. Our specialized ATS engine algorithmically enforces requirements by cross-referencing semantic meaning—saving massive pipelines of time and entirely removing manual hiring bias.
               </p>
               <Link to="/register" style={{ 
                 display: 'inline-flex', alignItems: 'center', gap: 10,
-                borderRadius: '16px', padding: '16px 32px', fontSize: 16, fontWeight: 800,
+                borderRadius: '16px', padding: '16px 32px', fontSize: 16, fontWeight: 700,
                 background: '#0f172a', textDecoration: 'none', color: '#fff',
                 transition: 'all 0.3s', boxShadow: '0 10px 30px rgba(15, 23, 42, 0.2)'
               }} onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-3px)'} onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
@@ -144,15 +144,15 @@ export default function LandingPage() {
                   display: 'flex', gap: 24, transition: 'transform 0.3s'
                 }} onMouseEnter={e => e.currentTarget.style.transform = 'translateX(8px)'} onMouseLeave={e => e.currentTarget.style.transform = 'translateX(0)'}>
                   <div style={{ 
-                    fontSize: 24, fontWeight: 900, color, background: `${color}15`,
+                    fontSize: 24, fontWeight: 700, color, background: `${color}15`,
                     width: 64, height: 64, flexShrink: 0, borderRadius: '16px',
                     display: 'flex', alignItems: 'center', justifyContent: 'center'
                   }}>
                     {num}
                   </div>
                   <div>
-                    <h3 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', marginBottom: 8, margin: 0 }}>{title}</h3>
-                    <p style={{ color: '#64748b', margin: '4px 0 0', lineHeight: 1.6, fontSize: 15 }}>{desc}</p>
+                    <h3 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 6, margin: 0 }}>{title}</h3>
+                    <p style={{ color: '#64748b', margin: '4px 0 0', lineHeight: 1.6, fontSize: 14 }}>{desc}</p>
                   </div>
                 </div>
               ))}
@@ -166,7 +166,7 @@ export default function LandingPage() {
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%)' }} />
         
         <div style={{ maxWidth: 800, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <h2 style={{ fontSize: 'clamp(32px, 5vw, 56px)', fontWeight: 900, color: '#fff', marginBottom: 24, letterSpacing: '-1px' }}>
+          <h2 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 700, color: '#fff', marginBottom: 20, letterSpacing: '-1px' }}>
             Ready to discover what's possible?
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 18, marginBottom: 48, lineHeight: 1.7, fontWeight: 500 }}>
@@ -175,16 +175,16 @@ export default function LandingPage() {
           <div style={{ display: 'flex', gap: 20, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/jobs" style={{ 
               background: '#fff', color: '#4f46e5', padding: '18px 40px', borderRadius: '16px', 
-              fontSize: 16, fontWeight: 900, textDecoration: 'none', transition: 'transform 0.2s', boxShadow: '0 10px 30px rgba(0,0,0,0.15)'
+              fontSize: 16, fontWeight: 700, textDecoration: 'none', transition: 'transform 0.2s', boxShadow: '0 10px 30px rgba(0,0,0,0.15)'
             }} onMouseEnter={e => e.target.style.transform = 'translateY(-2px)'} onMouseLeave={e => e.target.style.transform = 'translateY(0)'}>
               Discover Jobs
             </Link>
             <Link to="/register" style={{ 
               background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '18px 40px', borderRadius: '16px', 
-              border: '1px solid rgba(255,255,255,0.2)', fontSize: 16, fontWeight: 800, textDecoration: 'none',
+              border: '1px solid rgba(255,255,255,0.2)', fontSize: 16, fontWeight: 700, textDecoration: 'none',
               transition: 'background 0.2s'
             }} onMouseEnter={e => e.target.style.background = 'rgba(255,255,255,0.2)'} onMouseLeave={e => e.target.style.background = 'rgba(255,255,255,0.1)'}>
-              Create Local Account
+              Create Account
             </Link>
           </div>
         </div>

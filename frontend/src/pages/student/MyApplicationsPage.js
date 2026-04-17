@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { getMyApplications, getJobs } from '../../api';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 const STATUS = {
   applied:     { label: 'Pending Resume', bg: '#f1f5f9', color: '#64748b', icon: '📝' },
@@ -60,7 +60,7 @@ export default function MyApplicationsPage() {
               <span style={{ color: '#f8fafc' }}>Applications</span>
             </div>
 
-            <h1 style={{ fontSize: window.innerWidth < 768 ? 36 : 48, fontWeight: 900, marginBottom: 12, letterSpacing: '-1px', color: '#ffffff' }}>
+            <h1 style={{ fontSize: window.innerWidth < 768 ? 24 : 32, fontWeight: 700, marginBottom: 12, letterSpacing: '-1px', color: '#ffffff' }}>
               My Applications
             </h1>
             <p style={{ fontSize: 16, color: '#cbd5e1', maxWidth: 640, margin: 0, lineHeight: 1.6 }}>
@@ -74,11 +74,11 @@ export default function MyApplicationsPage() {
         
         {apps.length === 0 ? (
           <div className="animate-in" style={{ textAlign: 'center', padding: '80px 20px', background: '#fff', borderRadius: '24px', border: '1px solid rgba(0,0,0,0.04)', boxShadow: '0 10px 40px rgba(0,0,0,0.02)' }}>
-            <div style={{ fontSize: 64, marginBottom: 16 }}>📭</div>
-            <h3 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', marginBottom: 12 }}>No applications yet</h3>
-            <p style={{ color: '#64748b', fontSize: 16, marginBottom: 24 }}>You haven't submitted any job applications to our platform so far.</p>
+            <div style={{ fontSize: 40, marginBottom: 16 }}>📭</div>
+            <h3 style={{ fontSize: 20, fontWeight: 700, color: '#0f172a', marginBottom: 12 }}>No applications yet</h3>
+            <p style={{ color: '#64748b', fontSize: 14, marginBottom: 24 }}>You haven't submitted any job applications to our platform so far.</p>
             <button style={{ 
-              borderRadius: '16px', padding: '16px 32px', fontSize: 16, fontWeight: 800,
+              borderRadius: '16px', padding: '16px 32px', fontSize: 16, fontWeight: 700,
               background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)', border: 'none', color: '#fff',
               cursor: 'pointer', transition: 'all 0.3s', boxShadow: '0 10px 25px rgba(124, 58, 237, 0.3)'
             }} onClick={() => navigate('/jobs')} onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 15px 35px rgba(124, 58, 237, 0.4)'; }} onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 25px rgba(124, 58, 237, 0.3)'; }}>
@@ -94,9 +94,9 @@ export default function MyApplicationsPage() {
 
               return (
                 <div key={app.id} className="animate-in" style={{ 
-                  background: '#fff', borderRadius: '24px', padding: '36px', 
+                  background: '#fff', borderRadius: '24px', padding: '24px', 
                   border: '1px solid rgba(0,0,0,0.04)', boxShadow: '0 10px 30px rgba(0,0,0,0.02)',
-                  transition: 'all 0.3s relative', display: 'flex', flexDirection: 'column', gap: 24,
+                  transition: 'all 0.3s relative', display: 'flex', flexDirection: 'column', gap: 16,
                   animationDelay: `${i * 0.05}s`
                 }} onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = '#e2e8f0'; }}
                    onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.04)'; }}>
@@ -107,7 +107,7 @@ export default function MyApplicationsPage() {
                       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
                         <span style={{ 
                           background: s.bg, color: s.color, padding: '6px 14px', borderRadius: '12px', 
-                          fontSize: 12, fontWeight: 800, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: 6 
+                          fontSize: 12, fontWeight: 700, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: 6 
                         }}>
                           {s.icon} {s.label}
                         </span>
@@ -116,7 +116,7 @@ export default function MyApplicationsPage() {
                         </span>
                       </div>
                       
-                      <h2 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', marginBottom: 8, lineHeight: 1.3 }}>
+                      <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0f172a', marginBottom: 8, lineHeight: 1.3 }}>
                         {job.title}
                       </h2>
                       
@@ -134,7 +134,7 @@ export default function MyApplicationsPage() {
                             <>
                               <span style={{ color: '#cbd5e1', margin: '0 4px' }}>•</span>
                               <a href={app.resume_drive_link} target="_blank" rel="noreferrer"
-                                style={{ color: '#7c3aed', fontWeight: 800, textDecoration: 'none' }}>
+                                style={{ color: '#7c3aed', fontWeight: 700, textDecoration: 'none' }}>
                                 View Drive PDF ↗
                               </a>
                             </>
@@ -147,11 +147,11 @@ export default function MyApplicationsPage() {
                     {app.ats_score != null && (
                       <div style={{ textAlign: 'center', flexShrink: 0 }}>
                         <div style={{
-                          fontSize: 48, fontWeight: 900, 
+                          fontSize: 32, fontWeight: 700, 
                           color: app.ats_score >= job.ats_threshold ? '#10b981' : '#ef4444',
                           lineHeight: 1, letterSpacing: '-1px'
                         }}>{app.ats_score.toFixed(0)}%</div>
-                        <div style={{ fontSize: 11, fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 1, marginTop: 8 }}>Match Score</div>
+                        <div style={{ fontSize: 11, fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: 1, marginTop: 4 }}>Match Score</div>
                       </div>
                     )}
                   </div>
@@ -182,11 +182,11 @@ export default function MyApplicationsPage() {
                       display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 
                     }}>
                       <div>
-                        <div style={{ fontSize: 16, fontWeight: 800, color: '#991b1b', marginBottom: 4 }}>Resume Upload Pending</div>
+                        <div style={{ fontSize: 16, fontWeight: 700, color: '#991b1b', marginBottom: 4 }}>Resume Upload Pending</div>
                         <div style={{ fontSize: 14, color: '#b91c1c' }}>Your application is incomplete. Upload your resume now to instantly receive your AI Match Factor.</div>
                       </div>
                       <button style={{ 
-                        borderRadius: '12px', padding: '12px 24px', fontSize: 14, fontWeight: 800,
+                        borderRadius: '12px', padding: '12px 24px', fontSize: 14, fontWeight: 700,
                         background: '#dc2626', border: 'none', color: '#fff', cursor: 'pointer', transition: 'all 0.2s',
                         boxShadow: '0 8px 20px rgba(220, 38, 38, 0.2)'
                       }} onClick={() => navigate(`/upload/${app.id}`)} onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
@@ -196,9 +196,12 @@ export default function MyApplicationsPage() {
                   )}
 
                   {app.status === 'selected' && (
-                    <div style={{ marginTop: 8, background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: '#fff', padding: '20px', borderRadius: '16px', boxShadow: '0 10px 25px rgba(16, 185, 129, 0.2)' }}>
-                      <div style={{ fontSize: 16, fontWeight: 800, marginBottom: 4 }}>🎉 Congratulations! You have been selected.</div>
-                      <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.9)' }}>The HR team has formally extended an active pipeline approval. Please check your email inbox for further communications and critical next steps.</div>
+                    <div style={{ marginTop: 8, background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: '#fff', padding: '12px 16px', borderRadius: '12px', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.2)', display: 'flex', alignItems: 'center', gap: 12 }}>
+                      <div style={{ fontSize: 24 }}>🎉</div>
+                      <div>
+                        <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 2 }}>Congratulations! You have been selected.</div>
+                        <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.9)', lineHeight: 1.3 }}>The HR team has formally extended an active pipeline approval. Please check your email inbox for further communications and critical next steps.</div>
+                      </div>
                     </div>
                   )}
                 </div>

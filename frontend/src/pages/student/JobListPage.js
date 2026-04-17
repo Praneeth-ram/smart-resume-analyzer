@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getJobs } from '../../api';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 const JOB_TYPES = ['All', 'Full-time', 'Part-time', 'Remote', 'Internship', 'Contract'];
 
 export default function JobListPage() {
@@ -28,9 +28,9 @@ export default function JobListPage() {
 
   return (
     <div style={{ background: '#f8fafc', minHeight: '100vh', fontFamily, paddingBottom: 80, overflowX: 'hidden' }}>
-      
+
       {/* Premium Header Container */}
-      <div style={{ 
+      <div style={{
         position: 'relative',
         background: 'linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)',
         borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
@@ -53,8 +53,8 @@ export default function JobListPage() {
 
         <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <div className="animate-in">
-            <h1 style={{ fontSize: window.innerWidth < 768 ? 40 : 56, fontWeight: 900, color: '#0f172a', letterSpacing: '-1.5px', marginBottom: 20 }}>
-              Find Your <span style={{ 
+            <h1 style={{ fontSize: window.innerWidth < 768 ? 24 : 32, fontWeight: 700, color: '#0f172a', letterSpacing: '-1.5px', marginBottom: 20 }}>
+              Find Your <span style={{
                 background: 'linear-gradient(135deg, #7c3aed 0%, #0ea5e9 100%)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
               }}>Next Role.</span>
@@ -81,9 +81,9 @@ export default function JobListPage() {
                 onChange={e => setSearch(e.target.value)}
               />
               <button style={{
-                 background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)', border: 'none',
-                 color: '#fff', padding: '14px 32px', borderRadius: '14px', fontSize: 15, fontWeight: 800,
-                 cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 8px 20px rgba(124, 58, 237, 0.2)'
+                background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)', border: 'none',
+                color: '#fff', padding: '14px 32px', borderRadius: '14px', fontSize: 15, fontWeight: 700,
+                cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 8px 20px rgba(124, 58, 237, 0.2)'
               }} onMouseEnter={e => e.target.style.transform = 'translateY(-2px)'} onMouseLeave={e => e.target.style.transform = 'translateY(0)'}>
                 Search
               </button>
@@ -94,7 +94,7 @@ export default function JobListPage() {
 
       {/* Main Content */}
       <div style={{ maxWidth: 1280, margin: '-25px auto 0', padding: '0 40px', position: 'relative', zIndex: 10 }}>
-        
+
         {/* Filter Chips Layer */}
         <div className="animate-in" style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap', marginBottom: 48, animationDelay: '0.1s' }}>
           {JOB_TYPES.map(t => {
@@ -106,8 +106,8 @@ export default function JobListPage() {
                 background: active ? '#0f172a' : '#ffffff',
                 color: active ? '#ffffff' : '#64748b', transition: 'all 0.2s',
                 boxShadow: active ? '0 10px 20px rgba(15, 23, 42, 0.2)' : '0 4px 10px rgba(0,0,0,0.03)'
-              }} onMouseEnter={e => { if(!active) e.target.style.borderColor = '#94a3b8'; }} 
-                 onMouseLeave={e => { if(!active) e.target.style.borderColor = '#e2e8f0'; }}>
+              }} onMouseEnter={e => { if (!active) e.target.style.borderColor = '#94a3b8'; }}
+                onMouseLeave={e => { if (!active) e.target.style.borderColor = '#e2e8f0'; }}>
                 {t}
               </button>
             )
@@ -117,7 +117,7 @@ export default function JobListPage() {
         {/* Results Metadata */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
           <div style={{ fontSize: 15, fontWeight: 600, color: '#64748b' }}>
-            Showing <strong>{filtered.length}</strong> {filtered.length === 1 ? 'position' : 'positions'} {search && <span>for <strong style={{color: '#0f172a'}}>"{search}"</strong></span>}
+            Showing <strong>{filtered.length}</strong> {filtered.length === 1 ? 'position' : 'positions'} {search && <span>for <strong style={{ color: '#0f172a' }}>"{search}"</strong></span>}
           </div>
         </div>
 
@@ -127,11 +127,11 @@ export default function JobListPage() {
           </div>
         ) : filtered.length === 0 ? (
           <div className="animate-in" style={{ textAlign: 'center', padding: '100px 20px', background: '#fff', borderRadius: '24px', border: '1px solid #f1f5f9', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
-            <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
-            <h3 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', marginBottom: 12 }}>No matches found</h3>
-            <p style={{ color: '#64748b', fontSize: 16 }}>We couldn't find any positions matching your specific criteria.</p>
+            <div style={{ fontSize: 40, marginBottom: 16 }}>🔍</div>
+            <h3 style={{ fontSize: 20, fontWeight: 700, color: '#0f172a', marginBottom: 12 }}>No matches found</h3>
+            <p style={{ color: '#64748b', fontSize: 14 }}>We couldn't find any positions matching your specific criteria.</p>
             <button onClick={() => { setSearch(''); setActiveType('All'); }} style={{
-              marginTop: 24, padding: '12px 24px', borderRadius: '12px', background: '#f8fafc', 
+              marginTop: 24, padding: '12px 24px', borderRadius: '12px', background: '#f8fafc',
               color: '#475569', fontWeight: 700, border: '1px solid #e2e8f0', cursor: 'pointer'
             }}>
               Clear Filters
@@ -142,63 +142,63 @@ export default function JobListPage() {
             {filtered.map((job, idx) => {
               const deadline = new Date(job.deadline);
               const today = new Date();
-              today.setHours(0,0,0,0);
+              today.setHours(0, 0, 0, 0);
               const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
               const isUrgent = daysLeft > 0 && daysLeft <= 3;
               const isClosed = daysLeft <= 0;
 
               return (
                 <div key={job.id} className="animate-in" onClick={() => navigate(`/jobs/${job.id}`)} style={{
-                  background: '#ffffff', borderRadius: '24px', padding: '36px', cursor: 'pointer',
+                  background: '#ffffff', borderRadius: '20px', padding: '16px 20px', cursor: 'pointer',
                   border: '1px solid rgba(0,0,0,0.03)', boxShadow: '0 10px 30px rgba(0,0,0,0.02)',
                   animationDelay: `${0.1 + (idx * 0.05)}s`, transition: 'all 0.3s ease',
                   display: 'flex', flexDirection: 'column'
                 }} onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.06)'; }}
-                   onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.02)'; }}>
-                  
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
-                     <div style={{
-                       background: 'rgba(124, 58, 237, 0.06)', color: '#7c3aed', padding: '8px 16px',
-                       borderRadius: '20px', fontSize: 12, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 0.6
-                     }}>
-                       {job.job_type || 'Full-time'}
-                     </div>
-                     {isUrgent && <div style={{ background: '#fef08a', color: '#854d0e', padding: '6px 14px', borderRadius: '20px', fontSize: 11, fontWeight: 800, textTransform: 'uppercase' }}>Closing Soon</div>}
-                     {isClosed && <div style={{ background: '#fee2e2', color: '#b91c1c', padding: '6px 14px', borderRadius: '20px', fontSize: 11, fontWeight: 800, textTransform: 'uppercase' }}>Closed</div>}
+                  onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.02)'; }}>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
+                    <div style={{
+                      background: 'rgba(124, 58, 237, 0.06)', color: '#7c3aed', padding: '4px 12px',
+                      borderRadius: '12px', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.6
+                    }}>
+                      {job.job_type || 'Full-time'}
+                    </div>
+                    {isUrgent && <div style={{ background: '#fef08a', color: '#854d0e', padding: '4px 10px', borderRadius: '12px', fontSize: 10, fontWeight: 700, textTransform: 'uppercase' }}>Closing Soon</div>}
+                    {isClosed && <div style={{ background: '#fee2e2', color: '#b91c1c', padding: '4px 10px', borderRadius: '12px', fontSize: 10, fontWeight: 700, textTransform: 'uppercase' }}>Closed</div>}
                   </div>
 
-                  <h3 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', marginBottom: 12, lineHeight: 1.3 }}>{job.title}</h3>
-                  <div style={{ fontSize: 15, fontWeight: 700, color: '#475569', marginBottom: 20 }}>{job.company}</div>
+                  <h3 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 4, lineHeight: 1.3 }}>{job.title}</h3>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: '#475569', marginBottom: 16 }}>{job.company}</div>
 
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginBottom: 24, fontSize: 13, color: '#64748b', fontWeight: 500 }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16, fontSize: 12, color: '#64748b', fontWeight: 500 }}>
                     {job.location && <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span>📍</span> {job.location}</div>}
                     {job.salary_range && <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ color: '#10b981' }}>💰</span> {job.salary_range}</div>}
                     {job.experience_required && <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span>🎓</span> {job.experience_required}</div>}
                   </div>
 
                   {job.skills_required && (
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 'auto', marginBottom: 32 }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 'auto', marginBottom: 16 }}>
                       {job.skills_required.split(',').slice(0, 4).map(s => (
-                        <span key={s} style={{ background: '#f1f5f9', color: '#475569', padding: '6px 14px', borderRadius: '10px', fontSize: 13, fontWeight: 600 }}>
+                        <span key={s} style={{ background: '#f1f5f9', color: '#475569', padding: '4px 10px', borderRadius: '8px', fontSize: 12, fontWeight: 600 }}>
                           {s.trim()}
                         </span>
                       ))}
                       {job.skills_required.split(',').length > 4 && (
-                        <span style={{ fontSize: 13, color: '#94a3b8', fontWeight: 600, padding: '6px 4px' }}>
-                          +{job.skills_required.split(',').length - 4} more
+                        <span style={{ fontSize: 12, color: '#94a3b8', fontWeight: 600, padding: '4px' }}>
+                          +{job.skills_required.split(',').length - 4}
                         </span>
                       )}
                     </div>
                   )}
 
-                  <div style={{ height: 1, background: '#f1f5f9', margin: '0 0 24px 0' }} />
+                  <div style={{ height: 1, background: '#f1f5f9', margin: '0 0 16px 0' }} />
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 13, color: '#94a3b8', fontWeight: 500 }}>
-                       Posted {new Date(job.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    <span style={{ fontSize: 12, color: '#94a3b8', fontWeight: 500 }}>
+                      Posted {new Date(job.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </span>
-                    <span style={{ color: '#7c3aed', fontSize: 15, fontWeight: 800, display: 'flex', alignItems: 'center', gap: 4 }}>
-                      Apply Now <span style={{ fontSize: 18 }}>›</span>
+                    <span style={{ color: '#7c3aed', fontSize: 14, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 4 }}>
+                      Apply <span style={{ fontSize: 16 }}>›</span>
                     </span>
                   </div>
                 </div>

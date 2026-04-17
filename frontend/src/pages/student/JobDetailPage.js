@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getJob } from '../../api';
 import { useAuth } from '../../context/AuthContext';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 export default function JobDetailPage() {
   const { id } = useParams();
@@ -68,13 +68,13 @@ export default function JobDetailPage() {
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 32 }}>
               <div>
-                <h1 style={{ fontSize: window.innerWidth < 768 ? 36 : 48, fontWeight: 900, color: '#ffffff', letterSpacing: '-1px', marginBottom: 16 }}>
+                <h1 style={{ fontSize: window.innerWidth < 768 ? 24 : 32, fontWeight: 700, color: '#ffffff', letterSpacing: '-1px', marginBottom: 16 }}>
                   {job.title}
                 </h1>
                 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 15, fontWeight: 600, color: '#cbd5e1' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <span style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '8px', color: '#fff', fontWeight: 800 }}>🏢 {job.company}</span>
+                    <span style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '8px', color: '#fff', fontWeight: 700 }}>🏢 {job.company}</span>
                   </div>
                   {job.location && <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>📍 {job.location}</div>}
                   {job.job_type && <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>⏱ {job.job_type}</div>}
@@ -84,13 +84,13 @@ export default function JobDetailPage() {
 
               {!isClosed() && (
                 <button className="animate-in" onClick={handleApply} style={{ 
-                  animationDelay: '0.2s', padding: '16px 32px', borderRadius: '16px', fontSize: 16, fontWeight: 800,
+                  animationDelay: '0.2s', padding: '16px 32px', borderRadius: '16px', fontSize: 16, fontWeight: 700,
                   background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)', border: 'none', color: '#fff',
                   cursor: 'pointer', transition: 'all 0.3s', boxShadow: '0 10px 25px rgba(124, 58, 237, 0.4)',
                   display: 'flex', alignItems: 'center', gap: 10
                 }} onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 15px 35px rgba(124, 58, 237, 0.5)'; }} 
                    onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 25px rgba(124, 58, 237, 0.4)'; }}>
-                  Auto-Apply via Profile
+                  Apply now
                   <span style={{ fontSize: 20 }}>›</span>
                 </button>
               )}
@@ -117,12 +117,12 @@ export default function JobDetailPage() {
                   <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#f1f5f9" strokeWidth="3" />
                   <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#7c3aed" strokeWidth="3" strokeDasharray={`${job.ats_threshold}, 100`} />
                 </svg>
-                <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 800, color: '#7c3aed' }}>
+                <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 700, color: '#7c3aed' }}>
                   {job.ats_threshold}%
                 </div>
               </div>
               <div>
-                <h3 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>Automated Tracking System Filter</h3>
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>Automated Tracking System Filter</h3>
                 <p style={{ color: '#64748b', fontSize: 14, margin: 0, lineHeight: 1.6 }}>
                   Resumes submitted to this role will be instantly analyzed by AI. Only applicants successfully demonstrating a match score of <strong>{job.ats_threshold}%</strong> or higher will be forwarded to HR. 
                 </p>
@@ -136,7 +136,7 @@ export default function JobDetailPage() {
               marginBottom: 32, animationDelay: '0.2s'
             }}>
               
-              <h2 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid #f1f5f9' }}>
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0f172a', marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid #f1f5f9' }}>
                 About the Role
               </h2>
               <div style={{ color: '#475569', lineHeight: 1.8, fontSize: 16, whiteSpace: 'pre-wrap', marginBottom: 40 }}>
@@ -145,7 +145,7 @@ export default function JobDetailPage() {
 
               {job.requirements && (
                 <>
-                  <h2 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid #f1f5f9' }}>
+                  <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0f172a', marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid #f1f5f9' }}>
                     Requirements & Qualifications
                   </h2>
                   <div style={{ color: '#475569', lineHeight: 1.8, fontSize: 16, whiteSpace: 'pre-wrap' }}>
@@ -166,7 +166,7 @@ export default function JobDetailPage() {
                 border: '1px solid rgba(0,0,0,0.04)', boxShadow: '0 20px 50px rgba(0,0,0,0.04)',
                 animationDelay: '0.2s'
               }}>
-                <h3 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 24 }}>Recruitment Details</h3>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 20 }}>Recruitment Details</h3>
                 
                 {[
                   ['Job Type', job.job_type || 'Full-time'],
@@ -174,7 +174,7 @@ export default function JobDetailPage() {
                   ['Experience', job.experience_required || 'Not specified'],
                   ['Salary', job.salary_range || 'Not disclosed'],
                   ['Deadline', job.deadline ? new Date(job.deadline).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Open'],
-                  ['ATS Threshold', <span style={{ color: '#7c3aed', fontWeight: 800 }}>{job.ats_threshold}%</span>],
+                  ['ATS Threshold', <span style={{ color: '#7c3aed', fontWeight: 700 }}>{job.ats_threshold}%</span>],
                 ].map(([label, value]) => (
                   <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid #f1f5f9', fontSize: 14 }}>
                     <span style={{ color: '#64748b', fontWeight: 600 }}>{label}</span>
@@ -201,7 +201,7 @@ export default function JobDetailPage() {
                   border: '1px solid rgba(0,0,0,0.04)', boxShadow: '0 20px 50px rgba(0,0,0,0.04)',
                   animationDelay: '0.3s'
                 }}>
-                  <h3 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 20 }}>Required Technologies</h3>
+                  <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 20 }}>Required Technologies</h3>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
                     {job.skills_required.split(',').filter(Boolean).map(s => (
                       <span key={s} style={{ 
@@ -222,17 +222,17 @@ export default function JobDetailPage() {
                 }}>
                   <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: 120, height: 120, background: 'radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, transparent 70%)', borderRadius: '50%' }}/>
                   
-                  <h3 style={{ fontWeight: 800, marginBottom: 12, fontSize: 20, color: '#fff', position: 'relative' }}>Ready for your next move?</h3>
+                  <h3 style={{ fontWeight: 700, marginBottom: 12, fontSize: 18, color: '#fff', position: 'relative' }}>Ready for your next move?</h3>
                   <p style={{ margin: '0 0 24px 0', fontSize: 14, color: '#cbd5e1', lineHeight: 1.6, position: 'relative' }}>
                     Upload your latest resume and immediately see how well you match this position's expectations.
                   </p>
                   <button onClick={handleApply} style={{ 
-                    width: '100%', borderRadius: '16px', padding: '16px', fontSize: 16, fontWeight: 800,
+                    width: '100%', borderRadius: '16px', padding: '16px', fontSize: 16, fontWeight: 700,
                     background: '#fff', border: 'none', color: '#0f172a',
                     cursor: 'pointer', transition: 'all 0.2s', position: 'relative'
                   }} onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 15px rgba(255,255,255,0.2)'; }} 
                      onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>
-                    Start Application
+                    Start Applying
                   </button>
                 </div>
               )}

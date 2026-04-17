@@ -6,7 +6,7 @@ import {
 } from 'recharts';
 import { toast } from 'react-toastify';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 const StatCard = ({ icon, color, label, value, delay }) => (
   <div className="animate-in" style={{
@@ -35,26 +35,26 @@ const StatCard = ({ icon, color, label, value, delay }) => (
       background: `radial-gradient(circle, ${color}20 0%, transparent 70%)`,
       borderRadius: '50%'
     }} />
-    <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
       <div style={{
-        width: 56, height: 56, borderRadius: '18px',
+        width: 40, height: 40, borderRadius: '10px',
         background: `linear-gradient(135deg, ${color}15 0%, ${color}05 100%)`,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: 28, color: color,
+        fontSize: 18, color: color,
         boxShadow: `inset 0 2px 4px ${color}10`
       }}>
         {icon}
       </div>
       <div>
-        <div style={{ fontSize: 13, color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1 }}>
+        <div style={{ fontSize: 11, color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1 }}>
           {label}
         </div>
       </div>
     </div>
     <div>
       <div style={{ 
-        fontSize: 42, 
-        fontWeight: 800, 
+        fontSize: 24, 
+        fontWeight: 700, 
         color: '#0f172a',
         background: `linear-gradient(135deg, #0f172a 0%, ${color} 100%)`,
         backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
@@ -87,17 +87,17 @@ const ActionCard = ({ icon, color, title, desc, action, cta, delay }) => (
     e.currentTarget.style.borderColor = `rgba(0,0,0,0.04)`;
   }}>
     <div style={{
-      width: 60, height: 60, borderRadius: '16px',
+      width: 44, height: 44, borderRadius: '12px',
       background: `linear-gradient(135deg, ${color}20 0%, ${color}05 100%)`,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      fontSize: 28, color: color, marginBottom: 24
+      fontSize: 20, color: color, marginBottom: 16
     }}>
       {icon}
     </div>
-    <h3 style={{ fontSize: 20, fontWeight: 800, marginBottom: 12, color: '#0f172a' }}>{title}</h3>
-    <p style={{ fontSize: 15, color: '#64748b', lineHeight: 1.6, marginBottom: 32, flex: 1 }}>{desc}</p>
+    <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 8, color: '#0f172a' }}>{title}</h3>
+    <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6, marginBottom: 24, flex: 1 }}>{desc}</p>
     <button onClick={action} style={{ 
-      width: '100%', borderRadius: '14px', fontWeight: 700, fontSize: 15, padding: '16px 20px',
+      width: '100%', borderRadius: '12px', fontWeight: 700, fontSize: 14, padding: '12px 16px',
       border: 'none', background: `linear-gradient(135deg, ${color} 0%, ${color}dd 100%)`,
       color: '#fff', cursor: 'pointer', transition: 'all 0.3s ease',
       boxShadow: `0 8px 20px ${color}40`
@@ -122,7 +122,7 @@ const CustomTooltip = ({ active, payload, label }) => {
         boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
       }}>
         <p style={{ margin: '0 0 4px', fontWeight: 700, color: '#64748b', fontSize: 13, textTransform: 'uppercase', letterSpacing: 0.5 }}>{label}</p>
-        <p style={{ margin: 0, fontWeight: 800, color: payload[0].payload.color, fontSize: 22 }}>
+        <p style={{ margin: 0, fontWeight: 700, color: payload[0].payload.color, fontSize: 22 }}>
           {payload[0].value}
         </p>
       </div>
@@ -182,14 +182,14 @@ export default function HRDashboard() {
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
                 <span style={{ 
                   padding: '6px 14px', background: 'rgba(124, 58, 237, 0.1)', color: '#7c3aed', 
-                  borderRadius: '20px', fontSize: 13, fontWeight: 800, letterSpacing: 0.8,
+                  borderRadius: '20px', fontSize: 13, fontWeight: 700, letterSpacing: 0.8,
                   border: '1px solid rgba(124, 58, 237, 0.15)'
                 }}>
                   HR WORKSPACE
                 </span>
                 <span style={{ fontSize: 15, color: '#64748b', fontWeight: 600 }}>{data?.company_name}</span>
               </div>
-              <h1 style={{ fontSize: window.innerWidth < 768 ? 36 : 48, fontWeight: 900, color: '#0f172a', letterSpacing: '-1px', marginBottom: 12, lineHeight: 1.1 }}>
+              <h1 style={{ fontSize: window.innerWidth < 768 ? 24 : 32, fontWeight: 700, color: '#0f172a', letterSpacing: '-1px', marginBottom: 12, lineHeight: 1.1 }}>
                 Welcome back,{" "}
                 <span style={{ 
                   background: 'linear-gradient(135deg, #7c3aed 0%, #0ea5e9 100%)',
@@ -252,7 +252,7 @@ export default function HRDashboard() {
               animationDelay: '0.3s', flex: 1, display: 'flex', flexDirection: 'column'
             }}>
               <div style={{ marginBottom: 36 }}>
-                <h2 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>Candidate Flow</h2>
+                <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>Candidate Flow</h2>
                 <p style={{ fontSize: 15, color: '#64748b', margin: 0 }}>Visual mapping of the candidate screening pipeline.</p>
               </div>
               
@@ -298,7 +298,7 @@ export default function HRDashboard() {
                 background: 'radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, transparent 70%)',
                 borderRadius: '50%'
               }}/>
-              <h3 style={{ fontSize: 20, fontWeight: 800, marginBottom: 12, position: 'relative', color: '#ffffff' }}>AI Screening</h3>
+              <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 12, position: 'relative', color: '#ffffff' }}>AI Screening</h3>
               <p style={{ fontSize: 14, color: '#ffffff', lineHeight: 1.6, margin: '0 0 24px 0', position: 'relative' }}>
                 Our system dynamically screens resumes focusing on keyword overlaps and experience thresholds. Check your Active Jobs to tweak criteria.
               </p>
@@ -340,7 +340,7 @@ export default function HRDashboard() {
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   flexDirection: 'column'
                 }}>
-                  <span style={{ fontSize: 28, fontWeight: 900, color: '#0f172a' }}>
+                  <span style={{ fontSize: 28, fontWeight: 700, color: '#0f172a' }}>
                     {data?.total_applications ? Math.round(((data.selected || 0) / data.total_applications) * 100) : 0}%
                   </span>
                   <span style={{ fontSize: 12, color: '#94a3b8', fontWeight: 600, marginTop: 2 }}>Selected</span>
@@ -354,7 +354,7 @@ export default function HRDashboard() {
 
         {/* Quick Actions Title moved outside fully */}
         <div style={{ marginTop: 48 }}>
-          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#0f172a', marginBottom: 24 }}>Actions</h2>
+          <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', marginBottom: 24 }}>Actions</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
             <ActionCard 
               icon="📝" color="#8b5cf6"

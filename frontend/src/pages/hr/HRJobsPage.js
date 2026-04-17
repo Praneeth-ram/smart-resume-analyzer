@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { getJobs, deleteJob } from '../../api';
 import { toast } from 'react-toastify';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 export default function HRJobsPage() {
   const [jobs, setJobs] = useState([]);
@@ -52,7 +52,7 @@ export default function HRJobsPage() {
                 <span>/</span>
                 <span style={{ color: '#0f172a' }}>Job Posts</span>
               </div>
-              <h1 style={{ fontSize: window.innerWidth < 768 ? 32 : 44, fontWeight: 900, color: '#0f172a', letterSpacing: '-1px', marginBottom: 12 }}>
+              <h1 style={{ fontSize: window.innerWidth < 768 ? 32 : 44, fontWeight: 700, color: '#0f172a', letterSpacing: '-1px', marginBottom: 12 }}>
                 Active <span style={{ 
                   background: 'linear-gradient(135deg, #7c3aed 0%, #0ea5e9 100%)',
                   WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
@@ -93,8 +93,8 @@ export default function HRJobsPage() {
             textAlign: 'center', border: '1px solid rgba(0,0,0,0.04)',
             boxShadow: '0 10px 40px rgba(0,0,0,0.02)', animationDelay: '0.2s'
           }}>
-            <div style={{ fontSize: 48, marginBottom: 20 }}>📋</div>
-            <h3 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', marginBottom: 12 }}>No job postings yet</h3>
+            <div style={{ fontSize: 40, marginBottom: 16 }}>📋</div>
+            <h3 style={{ fontSize: 20, fontWeight: 700, color: '#0f172a', marginBottom: 12 }}>No job postings yet</h3>
             <p style={{ fontSize: 16, color: '#64748b', marginBottom: 32 }}>Create your first job to start receiving and screening applications.</p>
             <button onClick={() => navigate('/hr/jobs/new')} style={{ 
               borderRadius: '14px', fontWeight: 700, fontSize: 15, padding: '14px 28px',
@@ -132,10 +132,10 @@ export default function HRJobsPage() {
                 
                 <div style={{ flex: '1 1 500px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
-                    <div style={{ fontWeight: 800, fontSize: 22, color: '#0f172a' }}>{job.title}</div>
+                    <div style={{ fontWeight: 700, fontSize: 22, color: '#0f172a' }}>{job.title}</div>
                     
                     <div style={{
-                      padding: '4px 12px', borderRadius: '20px', fontSize: 11, fontWeight: 800, letterSpacing: 0.8,
+                      padding: '4px 12px', borderRadius: '20px', fontSize: 11, fontWeight: 700, letterSpacing: 0.8,
                       background: job.status === 'active' ? 'rgba(16, 185, 129, 0.1)' : job.status === 'expired' ? 'rgba(239, 68, 68, 0.1)' : '#f1f5f9',
                       color: job.status === 'active' ? '#059669' : job.status === 'expired' ? '#dc2626' : '#64748b'
                     }}>

@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from datetime import date
 from database import get_db
 from models.models import User, StudentProfile, HRProfile, UserRole
 from schemas.schemas import UserRegister, UserLogin, Token, StudentProfileCreate, HRProfileCreate
@@ -16,6 +17,26 @@ def register(data: UserRegister, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(user)
     token = create_access_token({"sub": str(user.id), "role": user.role})
+
+    # Automatically create profile
+    if user.role == UserRole.hr:
+        hr_profile = HRProfile(
+            user_id=user.id,
+            name=data.full_name,
+            company_name=data.company_name or "Not Specified"
+        )
+        db.add(hr_profile)
+    elif user.role == UserRole.student:
+        student_profile = StudentProfile(
+            user_id=user.id,
+            name=data.full_name,
+            email=user.email,
+            date_of_birth=date.today()  # Placeholder DOB
+        )
+        db.add(student_profile)
+    
+    db.commit()
+
     return {"access_token": token, "token_type": "bearer", "role": user.role, "user_id": str(user.id)}
 
 @router.post("/login", response_model=Token)

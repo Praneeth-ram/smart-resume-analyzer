@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { getMyApplications, getJobs } from '../../api';
 
-const fontFamily = "'Söhne', 'Inter', sans-serif";
+const fontFamily = "sans-serif";
 
 export default function StudentDashboard() {
   const [apps, setApps] = useState([]);
@@ -35,12 +35,12 @@ export default function StudentDashboard() {
 
   const StatusBadge = ({ status }) => {
     switch (status) {
-      case 'rejected': return <span style={{ background: '#fef2f2', color: '#dc2626', padding: '4px 10px', borderRadius: '8px', fontSize: 11, fontWeight: 800, textTransform: 'uppercase' }}>Failed ATS</span>;
-      case 'ats_passed': return <span style={{ background: '#e0e7ff', color: '#4338ca', padding: '4px 10px', borderRadius: '8px', fontSize: 11, fontWeight: 800, textTransform: 'uppercase' }}>In Review</span>;
-      case 'shortlisted': return <span style={{ background: '#fef3c7', color: '#d97706', padding: '4px 10px', borderRadius: '8px', fontSize: 11, fontWeight: 800, textTransform: 'uppercase' }}>Shortlisted</span>;
-      case 'selected': return <span style={{ background: '#ecfdf5', color: '#059669', padding: '4px 10px', borderRadius: '8px', fontSize: 11, fontWeight: 800, textTransform: 'uppercase' }}>Hired 🎉</span>;
-      case 'ats_failed': return <span style={{ background: '#fef2f2', color: '#dc2626', padding: '4px 10px', borderRadius: '8px', fontSize: 11, fontWeight: 800, textTransform: 'uppercase' }}>Failed ATS</span>;
-      default: return <span style={{ background: '#f1f5f9', color: '#64748b', padding: '4px 10px', borderRadius: '8px', fontSize: 11, fontWeight: 800, textTransform: 'uppercase' }}>Pending</span>;
+      case 'rejected': return <span style={{ background: '#fef2f2', color: '#dc2626', padding: '4px 10px', borderRadius: '8px', fontSize: 11, fontWeight: 700, textTransform: 'uppercase' }}>Failed ATS</span>;
+      case 'ats_passed': return <span style={{ background: '#e0e7ff', color: '#4338ca', padding: '4px 10px', borderRadius: '8px', fontSize: 11, fontWeight: 700, textTransform: 'uppercase' }}>In Review</span>;
+      case 'shortlisted': return <span style={{ background: '#fef3c7', color: '#d97706', padding: '4px 10px', borderRadius: '8px', fontSize: 11, fontWeight: 700, textTransform: 'uppercase' }}>Shortlisted</span>;
+      case 'selected': return <span style={{ background: '#ecfdf5', color: '#059669', padding: '4px 10px', borderRadius: '8px', fontSize: 11, fontWeight: 700, textTransform: 'uppercase' }}>Hired 🎉</span>;
+      case 'ats_failed': return <span style={{ background: '#fef2f2', color: '#dc2626', padding: '4px 10px', borderRadius: '8px', fontSize: 11, fontWeight: 700, textTransform: 'uppercase' }}>Failed ATS</span>;
+      default: return <span style={{ background: '#f1f5f9', color: '#64748b', padding: '4px 10px', borderRadius: '8px', fontSize: 11, fontWeight: 700, textTransform: 'uppercase' }}>Pending</span>;
     }
   };
 
@@ -70,7 +70,7 @@ export default function StudentDashboard() {
 
         <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1, color: '#fff' }}>
           <div className="animate-in">
-            <h1 style={{ fontSize: window.innerWidth < 768 ? 36 : 48, fontWeight: 900, marginBottom: 12, letterSpacing: '-1px', color: '#ffffff' }}>
+            <h1 style={{ fontSize: window.innerWidth < 768 ? 24 : 32, fontWeight: 700, marginBottom: 12, letterSpacing: '-1px', color: '#ffffff' }}>
               Welcome to your Hub.
             </h1>
             <p style={{ fontSize: 16, color: '#cbd5e1', maxWidth: 600, margin: 0, lineHeight: 1.6 }}>
@@ -110,7 +110,7 @@ export default function StudentDashboard() {
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                     </div>
                   </div>
-                  <div style={{ fontSize: 36, fontWeight: 900, color: '#0f172a', marginBottom: 4, lineHeight: 1 }}>{s.value}</div>
+                  <div style={{ fontSize: 36, fontWeight: 700, color: '#0f172a', marginBottom: 4, lineHeight: 1 }}>{s.value}</div>
                   <div style={{ fontSize: 13, fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.8 }}>{s.label}</div>
                 </div>
               ))}
@@ -132,8 +132,8 @@ export default function StudentDashboard() {
                       🔍
                     </div>
                     <div>
-                      <h3 style={{ fontSize: 20, fontWeight: 800, color: '#0f172a', marginBottom: 6, margin: 0 }}>Discover Open Roles</h3>
-                      <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: 14, lineHeight: 1.5 }}>Browse the latest job openings, see live requirements, and calculate instant AI match scores against your resume.</p>
+                      <h3 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 6, margin: 0 }}>Discover Open Roles</h3>
+                      <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: 13, lineHeight: 1.5 }}>Browse the latest job openings, see live requirements, and calculate instant AI match scores against your resume.</p>
                     </div>
                  </div>
 
@@ -147,8 +147,8 @@ export default function StudentDashboard() {
                       📂
                     </div>
                     <div>
-                      <h3 style={{ fontSize: 20, fontWeight: 800, color: '#0f172a', marginBottom: 6, margin: 0 }}>Track Applications</h3>
-                      <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: 14, lineHeight: 1.5 }}>Monitor the pipeline statuses of roles you've applied for. Keep an eye on HR reviews and final selection decisions.</p>
+                      <h3 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 6, margin: 0 }}>Track Applications</h3>
+                      <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: 13, lineHeight: 1.5 }}>Monitor the pipeline statuses of roles you've applied for. Keep an eye on HR reviews and final selection decisions.</p>
                     </div>
                  </div>
 
@@ -171,7 +171,7 @@ export default function StudentDashboard() {
                 border: '1px solid rgba(0,0,0,0.04)', boxShadow: '0 15px 40px rgba(0,0,0,0.03)',
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28 }}>
-                  <h3 style={{ fontSize: 20, fontWeight: 800, color: '#0f172a', margin: 0 }}>Recent Activity</h3>
+                  <h3 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', margin: 0 }}>Recent Activity</h3>
                   {apps.length > 3 && (
                     <Link to="/my-applications" style={{ fontSize: 13, fontWeight: 700, color: '#7c3aed', textDecoration: 'none' }}>View All ›</Link>
                   )}
@@ -195,7 +195,7 @@ export default function StudentDashboard() {
                            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = '#f1f5f9'; }}>
                           
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                            <div style={{ fontWeight: 800, color: '#0f172a', fontSize: 16, lineHeight: 1.3, maxWidth: '70%' }}>{job.title}</div>
+                            <div style={{ fontWeight: 700, color: '#0f172a', fontSize: 16, lineHeight: 1.3, maxWidth: '70%' }}>{job.title}</div>
                             <StatusBadge status={app.status} />
                           </div>
                           
@@ -209,7 +209,7 @@ export default function StudentDashboard() {
                               <div style={{ height: 6, flex: 1, background: '#f1f5f9', borderRadius: 3, overflow: 'hidden' }}>
                                 <div style={{ height: '100%', background: app.ats_score >= job.ats_threshold ? '#10b981' : '#ef4444', width: `${app.ats_score}%` }} />
                               </div>
-                              <span style={{ fontSize: 12, fontWeight: 800, color: app.ats_score >= job.ats_threshold ? '#10b981' : '#ef4444' }}>
+                              <span style={{ fontSize: 12, fontWeight: 700, color: app.ats_score >= job.ats_threshold ? '#10b981' : '#ef4444' }}>
                                 {app.ats_score.toFixed(0)}%
                               </span>
                             </div>
