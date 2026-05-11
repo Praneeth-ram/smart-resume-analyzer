@@ -6,7 +6,7 @@ from models.models import Application, JobPost, StudentProfile, ApplicationStatu
 from services.rag_service import run_rag_analysis
 from services.ats_service import extract_resume_text
 from services.drive_service import upload_resume_to_drive
-from services.email_service import send_selection_email
+from services.email_service import send_selection_email, send_rag_rejection_email, send_rag_success_email
 from utils.auth import require_role, get_current_user
 import httpx, os
 
@@ -51,7 +51,7 @@ async def run_rag(
 
     if result["verdict"] == "SELECTED":
         app.status = ApplicationStatus.selected
-        send_selection_email(
+        send_rag_success_email(
             to_email=student.email,
             student_name=student.name,
             job_title=job.title,
@@ -60,6 +60,13 @@ async def run_rag(
         )
     else:
         app.status = ApplicationStatus.rejected
+        send_rag_rejection_email(
+            to_email=student.email,
+            student_name=student.name,
+            job_title=job.title,
+            company=job.company,
+            custom_message=result.get("reasoning", "")
+        )
 
     db.commit()
     db.refresh(app)

@@ -5,6 +5,7 @@ from models.models import Application, JobPost, StudentProfile, ApplicationStatu
 from schemas.schemas import ATSScoreResponse
 from services.ats_service import extract_resume_text, compute_ats_score, generate_feedback
 from services.drive_service import upload_resume_to_drive
+from services.email_service import send_ats_rejection_email, send_ats_success_email
 from utils.auth import get_current_user
 
 router = APIRouter()
@@ -95,6 +96,15 @@ async def upload_resume(
 
     if passed:
         application.status = ApplicationStatus.ats_passed
+        
+        student_name = student_profile.name
+        job_title = job.title
+        send_ats_success_email(
+            to_email=student_profile.email,
+            student_name=student_name,
+            job_title=job_title,
+            company=job.company
+        )
 
         # ───────────────────────────────────────────────────────────
         # ⭐ NEW — clear any previous RAG result on re-upload,
@@ -132,6 +142,13 @@ async def upload_resume(
         application.resume_drive_link = None
         application.resume_file = None
         application.resume_mimetype = None
+        
+        send_ats_rejection_email(
+            to_email=student_profile.email,
+            student_name=student_profile.name,
+            job_title=job.title,
+            company=job.company
+        )
 
     db.commit()
     db.refresh(application)

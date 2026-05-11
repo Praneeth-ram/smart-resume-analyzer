@@ -8,7 +8,7 @@ const STATS = [
   { value: '2.1s', label: 'Analysis Time' },
   { value: '100%', label: 'Accurate Results' },
   { value: '100%', label: 'Automated Parsing' },
-  { value: '3-Step', label: 'Clear Process' },
+  { value: '2-Step', label: 'Clear Process' },
 ];
 
 export default function LandingPage() {
